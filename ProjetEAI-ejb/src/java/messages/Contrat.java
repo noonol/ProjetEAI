@@ -8,6 +8,7 @@ package bd_eai;
 import enumeration.EnumCommunication;
 import enumeration.EnumSecurite;
 import enumeration.EnumDecoration;
+import enumerations.EtatContrat;
 
 /**
  *
@@ -23,6 +24,11 @@ public class Contrat {
         this.montantGlobal = montantGlobal;
         this.nbPersonnes = nbPersonnes;
         this.leClient = leClient;
+        this.etat = EtatContrat.initialise;
+    }
+
+    public EtatContrat getEtat() {
+        return etat;
     }
 
     public int getIdContrat() {
@@ -55,6 +61,10 @@ public class Contrat {
 
     public void setIdContrat(int idContrat) {
         this.idContrat = idContrat;
+    }
+    
+    public void setEtat(EtatContrat etat) {
+        this.etat = etat;
     }
 
     public void setDecoration(EnumDecoration decoration) {
@@ -92,4 +102,5 @@ public class Contrat {
     private float montantGlobal;
     private int nbPersonnes;
     private Client leClient;
+    private EtatContrat etat;
 }
