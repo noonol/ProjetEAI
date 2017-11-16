@@ -21,7 +21,7 @@ public class Prestataire {
 
     public String getSIREN() {
         return SIREN;
-    }
+    }   
 
     public void setSIREN(String SIREN) {
         this.SIREN = SIREN;
