@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package webserver;
-
-import javax.ejb.Local;
+package exceptions;
 
 /**
  *
  * @author Nolwenn PILLARD
  */
-@Local
-public interface ApplicationEmployesLocal {
+public class ExceptionTropicDejaUtilise extends Exception{
     
 }
