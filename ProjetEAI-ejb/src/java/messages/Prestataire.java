@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bd_eai;
+package messages;
 
 /**
  *
@@ -21,7 +21,7 @@ public class Prestataire {
 
     public String getSIREN() {
         return SIREN;
-    }
+    }   
 
     public void setSIREN(String SIREN) {
         this.SIREN = SIREN;

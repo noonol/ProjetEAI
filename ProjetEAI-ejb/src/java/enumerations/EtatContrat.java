@@ -18,6 +18,6 @@ public enum EtatContrat {
     gestion_personnel,
     gestion_prestataire_complementaire,
     annulé,
-    validé,
+    validé
    
 }
