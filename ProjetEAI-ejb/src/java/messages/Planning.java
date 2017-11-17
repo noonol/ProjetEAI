@@ -17,10 +17,40 @@ public class Planning {
     private Personne laPersonne;
     private Contrat leContrat;
     private Salle laSalle;
-    public Planning(Date dateHeureDebut, Date dateHeureFin) {
+
+    public Planning(Date dateHeureDebut, Date dateHeureFin, Personne laPersonne, Contrat leContrat, Salle laSalle) {
         this.dateHeureDebut = dateHeureDebut;
         this.dateHeureFin = dateHeureFin;
+        this.laPersonne = laPersonne;
+        this.leContrat = leContrat;
+        this.laSalle = laSalle;
     }
+
+    public Personne getLaPersonne() {
+        return laPersonne;
+    }
+
+    public void setLaPersonne(Personne laPersonne) {
+        this.laPersonne = laPersonne;
+    }
+
+    public Contrat getLeContrat() {
+        return leContrat;
+    }
+
+    public void setLeContrat(Contrat leContrat) {
+        this.leContrat = leContrat;
+    }
+
+    public Salle getLaSalle() {
+        return laSalle;
+    }
+
+    public void setLaSalle(Salle laSalle) {
+        this.laSalle = laSalle;
+    }
+    
+    
 
     public Date getDateHeureDebut() {
         return dateHeureDebut;

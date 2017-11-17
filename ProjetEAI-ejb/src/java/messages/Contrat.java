@@ -10,6 +10,7 @@ import enumeration.EnumSecurite;
 import enumeration.EnumDecoration;
 import enumerations.EtatContrat;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -17,7 +18,7 @@ import java.io.Serializable;
  */
 public class Contrat implements Serializable {
 
-    public Contrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient) {
+    public Contrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, EtatContrat etat, Date dateHeureDebut, Date dateHeureFin, Salle salle) {
         this.idContrat = idContrat;
         this.decoration = decoration;
         this.communication = communication;
@@ -25,8 +26,37 @@ public class Contrat implements Serializable {
         this.montantGlobal = montantGlobal;
         this.nbPersonnes = nbPersonnes;
         this.leClient = leClient;
-        this.etat = EtatContrat.initialise;
+        this.etat = etat;
+        this.dateHeureDebut = dateHeureDebut;
+        this.dateHeureFin = dateHeureFin;
+        this.salle = salle;
     }
+
+    public Salle getSalle() {
+        return salle;
+    }
+
+    public void setSalle(Salle salle) {
+        this.salle = salle;
+    }
+
+
+    public Date getDateHeureDebut() {
+        return dateHeureDebut;
+    }
+
+    public void setDateHeureDebut(Date dateHeureDebut) {
+        this.dateHeureDebut = dateHeureDebut;
+    }
+
+    public Date getDateHeureFin() {
+        return dateHeureFin;
+    }
+
+    public void setDateHeureFin(Date dateHeureFin) {
+        this.dateHeureFin = dateHeureFin;
+    }
+
 
     public EtatContrat getEtat() {
         return etat;
@@ -104,4 +134,7 @@ public class Contrat implements Serializable {
     private int nbPersonnes;
     private Client leClient;
     private EtatContrat etat;
+    private Date dateHeureDebut;
+    private Date dateHeureFin;
+    private Salle salle;
 }

@@ -5,16 +5,19 @@
  */
 package messages;
 
+import enumeration.EnumTypePersonne;
+
 /**
  *
  * @author Rigal
  */
-public class Prestataire {
+public class Prestataire extends Personne {
     private String SIREN;
     private String adresseP;
     
     //Constructeur
-    public Prestataire(String SIREN, String adresseP) {
+    public Prestataire(int idPersonne, String nom, EnumTypePersonne type, float tarif, String tel, String SIREN, String adresseP) {
+        super(idPersonne, nom, type, tarif, tel);
         this.SIREN = SIREN;
         this.adresseP = adresseP;
     }

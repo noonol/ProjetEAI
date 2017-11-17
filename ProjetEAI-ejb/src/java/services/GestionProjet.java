@@ -14,6 +14,7 @@ import enumerations.EtatContrat;
 import exceptions.ExceptionTropicDejaUtilise;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -44,7 +45,7 @@ public class GestionProjet  implements MessageListener{
     // GestionSalle salle;
     
  private final ArrayList<Contrat> lesContrats = new ArrayList<>();
-   public void creerContrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient) throws ExceptionTropicDejaUtilise{
+   public void creerContrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, Date debut, Date fin) throws ExceptionTropicDejaUtilise{
         // On test qu'on n'a pas déjà un contrat en cours de traitement dans le Topic, avant d'en traiter un autre
         Message m = context.createConsumer(topic).receive();
         boolean stop = false;
@@ -63,7 +64,7 @@ public class GestionProjet  implements MessageListener{
        
        
        
-        Contrat c = new Contrat(idContrat, decoration, communication, securite, montantGlobal, nbPersonnes, leClient);
+        Contrat c = new Contrat(idContrat, decoration, communication, securite, montantGlobal, nbPersonnes, leClient,EtatContrat.initialise,debut,fin, null);
         c.setEtat(EtatContrat.gestion_projet);
         ObjectMessage om = context.createObjectMessage( c);
         context.createProducer().send(topic, om);

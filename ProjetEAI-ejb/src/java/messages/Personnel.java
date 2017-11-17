@@ -18,7 +18,7 @@ public class Personnel extends Personne {
         return "Personnel{" +super.toString()+ '}';
     } 
     
-    public Personnel(int idPersonne, String nom, EnumTypePersonne type, float tarif, long tel) {
+    public Personnel(int idPersonne, String nom, EnumTypePersonne type, float tarif, String tel) {
         super(idPersonne, nom, type, tarif, tel);
     }
     

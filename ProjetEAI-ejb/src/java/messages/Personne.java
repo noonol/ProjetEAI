@@ -17,7 +17,7 @@ public class Personne {
     private String nom;
     private EnumTypePersonne type;
     private float tarif;
-    private long tel;
+    private String tel;
     
 //toString 
      @Override
@@ -25,7 +25,7 @@ public class Personne {
         return "Personne{" + "idPersonne=" + idPersonne + ", nom=" + nom + ", type=" + type + ", tarif=" + tarif + ", tel=" + tel + '}';
     }   
 //Constructeur
-    public Personne(int idPersonne, String nom, EnumTypePersonne type, float tarif, long tel) {
+    public Personne(int idPersonne, String nom, EnumTypePersonne type, float tarif, String tel) {
         this.idPersonne = idPersonne;
         this.nom = nom;
         this.type = type;
@@ -65,11 +65,11 @@ public class Personne {
         this.tarif = tarif;
     }
 
-    public long getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(long tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 
