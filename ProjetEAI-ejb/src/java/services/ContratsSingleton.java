@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package WebServer;
+package services;
 
 import enumeration.EnumCommunication;
 import enumeration.EnumDecoration;
@@ -25,16 +25,17 @@ public class ContratsSingleton {
 
     @EJB
     ClientsSingleton clients;
-    
-  private final HashMap<String, Contrat> contrats;
+
+    private final HashMap<String, Contrat> contrats;
 
     public ContratsSingleton() {
         contrats = new HashMap<>();
         // creation des contrats
-       // null pointer exception Contrat c1 = new Contrat(1, EnumDecoration.simple, EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clients.getClients().get("1"));
-       Client clt = new Client(1, "T.Desprats", "23 rue des coquelicots, 31530 Lévignac, Colocation 6b", "mdp"); 
-       Contrat c1 = new Contrat(1, EnumDecoration.simple, EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clt);
-       
+        //  Client clt = clients.getClients().get(1);
+        // null pointer exception 
+        Client clt = new Client(1, "T.Desprats", "23 rue des coquelicots, 31530 Lévignac, Colocation 6b", "mdp"); 
+        Contrat c1 = new Contrat(1, EnumDecoration.simple, EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clt);
+
     }
 
     public HashMap<String, Contrat> getContrats() {
