@@ -9,9 +9,11 @@ import enumeration.EnumCommunication;
 import enumeration.EnumDecoration;
 import enumeration.EnumSecurite;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import javax.ejb.Singleton;
 import javax.ejb.LocalBean;
+import javax.ejb.Startup;
 
 import messages.Client;
 import messages.Contrat;
@@ -24,7 +26,7 @@ import messages.Contrat;
 @LocalBean
 public class ClientsSingleton {
 
-    private final HashMap<String, Client> clients;
+    private HashMap<Integer, Client> clients = new HashMap<>();
 
     public ClientsSingleton() {
         clients = new HashMap<>();
@@ -32,12 +34,16 @@ public class ClientsSingleton {
         
         Client c1 = new Client(1, "T.Desprats", "23 rue des coquelicots, 31530 Lévignac, Colocation 6b", "mdp");
         Client c2 = new Client(2, "C.Teyssié", "23 rue des coquelicots, 31530 Lévignac, Colocation 6b", "mdp");
-        clients.put("1", c1);
-        clients.put("2", c2);
+        clients.put(c1.getIdClient(), c1);
+        clients.put(c2.getIdClient(), c2);
     }
 
-    public HashMap<String, Client> getClients() {
-        return clients;
+    public Collection<Client> getClients() {
+        return clients.values();
+    }
+    
+    public Client getClient(Integer idClt) {
+        return clients.get(idClt);
     }
 
  //  private final ArrayList<Contrat> contrats = new ArrayList<Contrat>() { {contrats.add(new Contrat(1, EnumDecoration.simple, EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clients.get(0)));    }  };

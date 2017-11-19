@@ -13,6 +13,8 @@ public enum EtatContrat {
     initialise,
     //quand l'état par gestion, c'est à dire qu'il est utilisé par un bean en particulier
     gestion_projet,
+    gestion_projet_creer,
+    gestion_projet_annuler,
     gestion_restauration,
     gestion_salle,
     gestion_personnel,

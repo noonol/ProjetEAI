@@ -29,52 +29,27 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
+
 /**
  *
  * @author Marine
  */
 @Singleton
 @LocalBean
-public class GestionProjet  implements MessageListener{
+public class GestionProjet implements MessageListener {
+
     @Resource(lookup = "jms/TopicContrat")
     private Topic topic;
     @Inject
     private JMSContext context;
-    
-   // @EJB
-    // GestionSalle salle;
-    
- private final ArrayList<Contrat> lesContrats = new ArrayList<>();
-   public void creerContrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, Date debut, Date fin) throws ExceptionTropicDejaUtilise{
-        // On test qu'on n'a pas déjà un contrat en cours de traitement dans le Topic, avant d'en traiter un autre
-        Message m = context.createConsumer(topic).receive();
-        boolean stop = false;
-        try {
-                 ObjectMessage om = (ObjectMessage) m;
-                 Object obj = om.getObject();
-                 if (obj instanceof Contrat) {
-                     Contrat cmd = (Contrat) obj;
-                     if (!cmd.getEtat().equals(EtatContrat.validé)||!cmd.getEtat().equals(EtatContrat.annulé)){
-                         throw new ExceptionTropicDejaUtilise();
-                     }
-                 }
-             } catch (JMSException ex) {
-                 Logger.getLogger(GestionProjet.class.getName()).log(Level.SEVERE, null, ex);
-             }
-       
-       
-       
-        Contrat c = new Contrat(idContrat, decoration, communication, securite, montantGlobal, nbPersonnes, leClient,EtatContrat.initialise,debut,fin, null);
-        c.setEtat(EtatContrat.gestion_projet);
-        ObjectMessage om = context.createObjectMessage( c);
-        context.createProducer().send(topic, om);
-       // salle.reserver();
-        lesContrats.add(c);
-        
-    }
 
-   
-   public void addMontantContrat(float montantPrevu){
+    // @EJB
+    // GestionSalle salle;
+    @EJB
+    ContratsSingleton contrats;
+
+// private final ArrayList<Contrat> lesContrats = new ArrayList<>();
+    /*  public void addMontantContrat(float montantPrevu){
         Message m = context.createConsumer(topic).receive();
         try {
                  ObjectMessage om = (ObjectMessage) m;
@@ -94,30 +69,31 @@ public class GestionProjet  implements MessageListener{
                  Logger.getLogger(GestionProjet.class.getName()).log(Level.SEVERE, null, ex);
              }
         
-   }
+   } */
     @Override
     public void onMessage(Message message) {
-      if (message instanceof ObjectMessage) {
-             try {
-                 ObjectMessage om = (ObjectMessage) message;
-                 Object obj = om.getObject();
-                 if (obj instanceof Contrat) {
-                     Contrat c = (Contrat) obj;
-                     if (c.getEtat().equals(EtatContrat.validé)){
-                         int idC = c.getIdContrat();
-                         for (int i =0;i < lesContrats.size();i++){
-                             if(lesContrats.get(i).getIdContrat()==idC){
-                                 lesContrats.set(i, c);
-                             }
-                         }
-                         System.out.println("Contrat validé !");
-                     }
-                 }
-             } catch (JMSException ex) {
-                 Logger.getLogger(GestionProjet.class.getName()).log(Level.SEVERE, null, ex);
-             }
+        if (message instanceof ObjectMessage) {
+            try {
+                ObjectMessage om = (ObjectMessage) message;
+                Object obj = om.getObject();
+                if (obj instanceof Contrat) {
+                    Contrat c = (Contrat) obj;
+                    if (c.getEtat().equals(EtatContrat.validé)) {
+                        int idC = c.getIdContrat();
+                        for (int i = 0; i < contrats.getSizeContrat(); i++) {
+                            if (contrats.getContrat(i).getIdContrat() == idC) {
+                                // ZZZ MARINE contrats.add(i, c);
+                                contrats.add(c);
+                                // J'ai pas réussi à comprendre pourquoi on parcours la liste des contrats et on ajoute dans la meme liste les contrats ... Si tu peux y jeter un oeil :)
+                            }
+                        }
+                        System.out.println("Contrat validé !");
+                    }
+                }
+            } catch (JMSException ex) {
+                Logger.getLogger(GestionProjet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-    
 
 }

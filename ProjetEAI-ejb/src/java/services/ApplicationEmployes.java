@@ -13,7 +13,21 @@ import messages.Contrat;
 import enumeration.EnumCommunication;
 import enumeration.EnumDecoration;
 import enumeration.EnumSecurite;
+import enumerations.EtatContrat;
+import exceptions.ExceptionTropicDejaUtilise;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
+import javax.ejb.EJB;
+import javax.inject.Inject;
+import javax.jms.JMSContext;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.ObjectMessage;
+import javax.jms.Topic;
+import messages.Salle;
 
 //import javax.ejb.Stateless;
 /**
@@ -24,9 +38,21 @@ import java.util.ArrayList;
 @LocalBean
 public class ApplicationEmployes {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-/*    private final ArrayList<Client> clients = new ArrayList<Client>() {
+    @Resource(lookup = "jms/TopicContrat")
+    private Topic topic;
+    @Inject
+    private JMSContext context;
+
+    @EJB
+    ClientsSingleton clients;
+
+    @EJB
+    ContratsSingleton contrats;
+
+    //  @EJB
+    //  SalleSingleton salles;
+
+    /*    private final ArrayList<Client> clients = new ArrayList<Client>() {
         {
             clients.add(new Client(1, "T.Desprats", "23 rue des coquelicots, 31530 Lévignac, Colocation 6b", "mdp"));
             clients.add(new Client(2, "C.Teyssié", "23 rue des coquelicots, 31530 Lévignac, Colocation 6b", "mdp"));
@@ -38,10 +64,38 @@ public class ApplicationEmployes {
             contrats.add(new Contrat(1, EnumDecoration.simple, EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clients.get(0)));
         }
     }; */
+    public void creerContrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, Date debut, Date fin, Salle mySalle) throws ExceptionTropicDejaUtilise {
+        // On test qu'on n'a pas déjà un contrat en cours de traitement dans le Topic, avant d'en traiter un autre
+        Message m = context.createConsumer(topic).receive();
+        boolean stop = false;
+        try {
+            ObjectMessage om = (ObjectMessage) m;
+            Object obj = om.getObject();
+            if (obj instanceof Contrat) {
+                Contrat cmd = (Contrat) obj;
+                if (!cmd.getEtat().equals(EtatContrat.validé) || !cmd.getEtat().equals(EtatContrat.annulé)) {
+                    throw new ExceptionTropicDejaUtilise();
+                }
+            }
+        } catch (JMSException ex) {
+            Logger.getLogger(GestionProjet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    public Contrat creerContrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient) {
-        Contrat contrat = new Contrat(idContrat, decoration, communication, securite, montantGlobal, nbPersonnes, leClient);
-        return contrat;
+        // Initialisation des listes de contrats
+        // On crée un contrat pour en avoir un dans la liste de contrat 
+        Date dateHeureDebut = new Date("20170101200000");
+        Date dateHeureFin = new Date("20170102200000");
+        Contrat c1 = new Contrat(1, EnumDecoration.simple, EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clients.getClient(1), EtatContrat.initialise, dateHeureDebut, dateHeureFin, mySalle);
+        contrats.add(c1);
+
+        // On ajoute le contrat que l'on veux créer dans la liste des contrats
+        Contrat c = new Contrat(idContrat, decoration, communication, securite, montantGlobal, nbPersonnes, leClient, EtatContrat.initialise, debut, fin, null);
+        c.setEtat(EtatContrat.gestion_projet);
+        ObjectMessage om = context.createObjectMessage(c);
+        context.createProducer().send(topic, om);
+        // salle.reserver();
+        contrats.add(c);
+
     }
 
 }
