@@ -7,6 +7,7 @@ package services;
 
 import enumerations.EtatContrat;
 import enumerations.typePrestations;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -62,21 +63,31 @@ public class GestionRestauration implements MessageListener {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public float PrevoirTraiteur(Integer NbPers, Date dtHeureDebut, Date dtHeureFin) {
+        float montantPrevu = 0;
+        long nbJours = Math.abs(dtHeureDebut.getTime() - dtHeureFin.getTime());
+        // 20 e par jour et par personnes
+        montantPrevu = (nbJours * 20) * NbPers;
+        return montantPrevu;
+    }
+
     public void GererRestauration(Contrat monContrat) {
         float montantPrevu = 0;
-        // Prévoir traiteur
-        if (monContrat.getTypePresta()== typePrestations.assis) {
-            
-        }
-        // Set montant repas = montant traiteur + 15%
-        
-        // Pour la gestion du personnel : PrévoirPersonnel(Personnel de service, idCOntrat, 2)
-        
-        
-        
-        
-        // TODO 
 
+        if (monContrat.getTypePresta() == typePrestations.assis) {
+            // Prévoir traiteur
+            montantPrevu = PrevoirTraiteur(monContrat.getNbPersonnes(), monContrat.getDateHeureDebut(), monContrat.getDateHeureFin());
+            // Set montant repas = montant traiteur + 15%
+            montantPrevu = montantPrevu + ((montantPrevu * 15) / 100);
+            monContrat.setMontantGlobal(montantPrevu);
+
+            // Pour la gestion du personnel : PrévoirPersonnel(Personnel de service, idCOntrat, 2)
+            // TODO NOL
+        } else {
+
+        }
+
+        // TODO 
         monContrat.setEtat(EtatContrat.gestion_restauration_creer);
     }
 
