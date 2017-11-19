@@ -43,33 +43,9 @@ public class GestionProjet implements MessageListener {
     @Inject
     private JMSContext context;
 
-    // @EJB
-    // GestionSalle salle;
     @EJB
     ContratsSingleton contrats;
 
-// private final ArrayList<Contrat> lesContrats = new ArrayList<>();
-    /*  public void addMontantContrat(float montantPrevu){
-        Message m = context.createConsumer(topic).receive();
-        try {
-                 ObjectMessage om = (ObjectMessage) m;
-                 Object obj = om.getObject();
-                 if (obj instanceof Contrat) {
-                     //ajout du montant +mise à jour de la liste
-                     Contrat c = (Contrat) obj;
-                     c.setMontantGlobal(c.getMontantGlobal()+montantPrevu);
-                     int idC = c.getIdContrat();
-                     for (int i =0;i < lesContrats.size();i++){
-                             if(lesContrats.get(i).getIdContrat()==idC){
-                                 lesContrats.set(i, c);
-                             }
-                    }
-                 }
-             } catch (JMSException ex) {
-                 Logger.getLogger(GestionProjet.class.getName()).log(Level.SEVERE, null, ex);
-             }
-        
-   } */
     @Override
     public void onMessage(Message message) {
         if (message instanceof ObjectMessage) {
@@ -81,6 +57,7 @@ public class GestionProjet implements MessageListener {
                     if (c.getEtat().equals(EtatContrat.validé)) {
                         int idC = c.getIdContrat();
                         for (int i = 0; i < contrats.getSizeContrat(); i++) {
+                            // ATTENTION : la taille est différente de l'id donc ca peut lever une exception : plutot faire la recherhche sur l'id
                             if (contrats.getContrat(i).getIdContrat() == idC) {
                                 // ZZZ MARINE contrats.add(i, c);
                                 contrats.add(c);
@@ -88,6 +65,11 @@ public class GestionProjet implements MessageListener {
                             }
                         }
                         System.out.println("Contrat validé !");
+                    } else if (c.getEtat().equals(EtatContrat.gestion_restauration_creer)) {
+                        // met à jour le montant dans Contrat
+                        float montantPrevu = 0;
+                        montantPrevu = c.getMontantGlobal();
+                        // TODO NOL
                     }
                 }
             } catch (JMSException ex) {

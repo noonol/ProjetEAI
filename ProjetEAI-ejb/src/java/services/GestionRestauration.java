@@ -6,6 +6,7 @@
 package services;
 
 import enumerations.EtatContrat;
+import enumerations.typePrestations;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -47,8 +48,11 @@ public class GestionRestauration implements MessageListener {
                 if (obj instanceof Contrat) {
                     Contrat monContrat = (Contrat) obj;
                     if (monContrat.getEtat().equals(EtatContrat.gestion_projet_creer)) {
-                        float montantPrevu = GererRestauration(monContrat);
-                         System.out.println("Contrat arrivé dans la gestionRestauration pour création de contrat !");
+                        GererRestauration(monContrat);
+                        System.out.println("Contrat arrivé dans la gestionRestauration pour création de contrat !");
+                        ObjectMessage omToSend = context.createObjectMessage(monContrat);
+                        context.createProducer().send(topic, omToSend);
+                        System.out.println("Contrat traité dans GestionRestauration et renvoye le montant pour Gestion de projet!");
                     }
                 }
             } catch (JMSException ex) {
@@ -58,13 +62,22 @@ public class GestionRestauration implements MessageListener {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public float GererRestauration(Contrat monContrat) {
+    public void GererRestauration(Contrat monContrat) {
         float montantPrevu = 0;
+        // Prévoir traiteur
+        if (monContrat.getTypePresta()== typePrestations.assis) {
+            
+        }
+        // Set montant repas = montant traiteur + 15%
+        
+        // Pour la gestion du personnel : PrévoirPersonnel(Personnel de service, idCOntrat, 2)
+        
+        
+        
+        
+        // TODO 
 
-        
-        
-        
-        return montantPrevu;
+        monContrat.setEtat(EtatContrat.gestion_restauration_creer);
     }
 
 }

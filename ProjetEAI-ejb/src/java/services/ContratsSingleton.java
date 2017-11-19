@@ -38,17 +38,6 @@ public class ContratsSingleton {
 
     public ContratsSingleton() {
         contrats = new HashMap<>();
-        // Boolean b = false;
-
-        // creation des contrats
-        //     Date dateHeureDebut = new Date("20170101200000");
-        //    Date dateHeureFin = new Date("20170102200000");
-        //  ArrayList<Client> lesclt = new ArrayList<>(clients.getClients());
-        //  Client clt = lesclt.get(0);
-        //  Salle mySalle = new Salle(1, "Test", b, b, 200.00f);
-        // null pointer exception 
-        // Client clt = new Client(1, "T.Desprats", "23 rue des coquelicots, 31530 Lévignac, Colocation 6b", "mdp"); 
-        // Contrat c1 = new Contrat(1, EnumDecoration.simple, EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clt, EtatContrat.initialise, dateHeureDebut, dateHeureFin, mySalle);
     }
 
     public HashMap<Integer, Contrat> getContrats() {
@@ -63,8 +52,8 @@ public class ContratsSingleton {
         contrats.put(c.getIdContrat(), c);
         // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-      public Integer getSizeContrat() {
+
+    public Integer getSizeContrat() {
         return contrats.size();
     }
 }

@@ -8,6 +8,7 @@ package WebService;
 import enumeration.EnumCommunication;
 import enumeration.EnumDecoration;
 import enumeration.EnumSecurite;
+import enumerations.typePrestations;
 import exceptions.ExceptionTropicDejaUtilise;
 import java.util.Date;
 import javax.ejb.EJB;
@@ -29,8 +30,8 @@ public class ApplicationEmployes {
     // "Insert Code > Add Web Service Operation")
 
     @WebMethod(operationName = "creerContrat")
-    public void creerContrat(@WebParam(name = "idContrat") int idContrat, @WebParam(name = "decoration") EnumDecoration decoration, @WebParam(name = "communication") EnumCommunication communication, @WebParam(name = "securite") EnumSecurite securite, @WebParam(name = "montantGlobal") float montantGlobal, @WebParam(name = "nbPersonnes") int nbPersonnes, @WebParam(name = "leClient") Client leClient, @WebParam(name = "debut") Date debut, @WebParam(name = "fin") Date fin, @WebParam(name = "mySalle") Salle mySalle) throws ExceptionTropicDejaUtilise {
-        ejbRef.creerContrat(idContrat, decoration, communication, securite, montantGlobal, nbPersonnes, leClient, debut, fin, mySalle);
+    public void creerContrat(@WebParam(name = "idContrat") int idContrat, @WebParam(name = "decoration") EnumDecoration decoration, @WebParam(name = "communication") EnumCommunication communication, @WebParam(name = "securite") EnumSecurite securite, @WebParam(name = "montantGlobal") float montantGlobal, @WebParam(name = "nbPersonnes") int nbPersonnes, @WebParam(name = "leClient") Client leClient, @WebParam(name = "debut") Date debut, @WebParam(name = "fin") Date fin, @WebParam(name = "mySalle") Salle mySalle, @WebParam(name = "type") typePrestations type) throws ExceptionTropicDejaUtilise {
+        ejbRef.creerContrat(idContrat, decoration, communication, securite, montantGlobal, nbPersonnes, leClient, debut, fin, mySalle, type);
     }
     
 }

@@ -46,5 +46,4 @@ public class ClientsSingleton {
         return clients.get(idClt);
     }
 
- //  private final ArrayList<Contrat> contrats = new ArrayList<Contrat>() { {contrats.add(new Contrat(1, EnumDecoration.simple, EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clients.get(0)));    }  };
 }

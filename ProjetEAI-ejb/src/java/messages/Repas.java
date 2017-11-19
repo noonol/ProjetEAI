@@ -13,19 +13,21 @@ import java.util.Objects;
  * @author Nolwenn PILLARD
  */
 public class Repas {
-    
+
     private int idRepas;
     private typePrestations typePrestation;
     private boolean cocktailMaison;
     private float montantTraiteur;
     private Traiteur traiteur;
+    private int idContrat;
 
-    public Repas(int idRepas, typePrestations typePrestation, boolean cocktailMaison, float montantTraiteur, Traiteur traiteur) {
+    public Repas(int idRepas, typePrestations typePrestation, boolean cocktailMaison, float montantTraiteur, Traiteur traiteur, int idContrat) {
         this.idRepas = idRepas;
         this.typePrestation = typePrestation;
         this.cocktailMaison = cocktailMaison;
         this.montantTraiteur = montantTraiteur;
         this.traiteur = traiteur;
+        this.idContrat = idContrat;
     }
 
     public int getIdRepas() {
@@ -48,6 +50,10 @@ public class Repas {
         return traiteur;
     }
 
+    public int getIdContrat() {
+        return idContrat;
+    }
+
     public void setIdRepas(int idRepas) {
         this.idRepas = idRepas;
     }
@@ -68,9 +74,13 @@ public class Repas {
         this.traiteur = traiteur;
     }
 
+    public void setIdContrat(int idContrat) {
+        this.idContrat = idContrat;
+    }
+
     @Override
     public String toString() {
-        return "Repas{" + "idRepas=" + idRepas + ", typePrestation=" + typePrestation + ", cocktailMaison=" + cocktailMaison + ", montantTraiteur=" + montantTraiteur + ", traiteur=" + traiteur + '}';
+        return "Repas{" + "idRepas=" + idRepas + ", typePrestation=" + typePrestation + ", cocktailMaison=" + cocktailMaison + ", montantTraiteur=" + montantTraiteur + ", traiteur=" + traiteur + ", idContrat=" + idContrat + '}';
     }
 
 }

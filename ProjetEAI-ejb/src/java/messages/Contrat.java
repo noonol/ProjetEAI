@@ -9,6 +9,7 @@ import enumeration.EnumCommunication;
 import enumeration.EnumSecurite;
 import enumeration.EnumDecoration;
 import enumerations.EtatContrat;
+import enumerations.typePrestations;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,19 +19,18 @@ import java.util.Date;
  */
 public class Contrat implements Serializable {
 
-    public Contrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, EtatContrat etat, Date dateHeureDebut, Date dateHeureFin, Salle salle) {
-        this.idContrat = idContrat;
-        this.decoration = decoration;
-        this.communication = communication;
-        this.securite = securite;
-        this.montantGlobal = montantGlobal;
-        this.nbPersonnes = nbPersonnes;
-        this.leClient = leClient;
-        this.etat = etat;
-        this.dateHeureDebut = dateHeureDebut;
-        this.dateHeureFin = dateHeureFin;
-        this.salle = salle;
-    }
+    private int idContrat;
+    private EnumDecoration decoration;
+    private EnumCommunication communication;
+    private EnumSecurite securite;
+    private float montantGlobal;
+    private int nbPersonnes;
+    private Client leClient;
+    private EtatContrat etat;
+    private Date dateHeureDebut;
+    private Date dateHeureFin;
+    private Salle salle;
+    private typePrestations typePresta;
 
     public Salle getSalle() {
         return salle;
@@ -124,17 +124,33 @@ public class Contrat implements Serializable {
 
     @Override
     public String toString() {
-        return "Contrat{" + "idContrat=" + idContrat + ", decoration=" + decoration + ", communication=" + communication + ", securite=" + securite + ", montantGlobal=" + montantGlobal + ", nbPersonnes=" + nbPersonnes + ", leClient=" + leClient + '}';
+        return "Contrat{" + "idContrat=" + idContrat + ", decoration=" + decoration + ", communication=" + communication + ", securite=" + securite + ", montantGlobal=" + montantGlobal + ", nbPersonnes=" + nbPersonnes + ", leClient=" + leClient + ", etat=" + etat + ", dateHeureDebut=" + dateHeureDebut + ", dateHeureFin=" + dateHeureFin + ", salle=" + salle + ", typePresta=" + typePresta + '}';
     }
-    private int idContrat;
-    private EnumDecoration decoration;
-    private EnumCommunication communication;
-    private EnumSecurite securite;
-    private float montantGlobal;
-    private int nbPersonnes;
-    private Client leClient;
-    private EtatContrat etat;
-    private Date dateHeureDebut;
-    private Date dateHeureFin;
-    private Salle salle;
+
+
+  
+
+    public void setTypePresta(typePrestations typePresta) {
+        this.typePresta = typePresta;
+    }
+
+    public typePrestations getTypePresta() {
+        return typePresta;
+    }
+
+    public Contrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, EtatContrat etat, Date dateHeureDebut, Date dateHeureFin, Salle salle, typePrestations typePresta) {
+        this.idContrat = idContrat;
+        this.decoration = decoration;
+        this.communication = communication;
+        this.securite = securite;
+        this.montantGlobal = montantGlobal;
+        this.nbPersonnes = nbPersonnes;
+        this.leClient = leClient;
+        this.etat = etat;
+        this.dateHeureDebut = dateHeureDebut;
+        this.dateHeureFin = dateHeureFin;
+        this.salle = salle;
+        this.typePresta = typePresta;
+    }
+    
 }
