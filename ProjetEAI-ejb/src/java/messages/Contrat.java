@@ -5,9 +5,9 @@
  */
 package messages;
 
-import enumeration.EnumCommunication;
-import enumeration.EnumSecurite;
-import enumeration.EnumDecoration;
+import enumerations.EnumCommunication;
+import enumerations.EnumSecurite;
+import enumerations.EnumDecoration;
 import enumerations.EtatContrat;
 import enumerations.typePrestations;
 import java.io.Serializable;

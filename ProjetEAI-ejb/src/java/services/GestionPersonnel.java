@@ -5,7 +5,7 @@
  */
 package services;
 
-import enumeration.EnumTypePersonne;
+import enumerations.EnumTypePersonne;
 import enumerations.EtatContrat;
 import exceptions.ExceptionPersonnelNonTrouve;
 import java.util.ArrayList;

@@ -10,9 +10,9 @@ import javax.ejb.LocalBean;
 
 import messages.Client;
 import messages.Contrat;
-import enumeration.EnumCommunication;
-import enumeration.EnumDecoration;
-import enumeration.EnumSecurite;
+import enumerations.EnumCommunication;
+import enumerations.EnumDecoration;
+import enumerations.EnumSecurite;
 import enumerations.EtatContrat;
 import enumerations.typePrestations;
 import exceptions.ExceptionTropicDejaUtilise;
