@@ -16,18 +16,31 @@ public class Repas {
 
     private int idRepas;
     private typePrestations typePrestation;
-    private boolean cocktailMaison;
     private float montantTraiteur;
     private Traiteur traiteur;
     private int idContrat;
+    private Boolean cocktailMaison;
 
-    public Repas(int idRepas, typePrestations typePrestation, boolean cocktailMaison, float montantTraiteur, Traiteur traiteur, int idContrat) {
+    public Repas(int idRepas, typePrestations typePrestation, float montantTraiteur, Traiteur traiteur, int idContrat, Boolean cocktailMaison) {
         this.idRepas = idRepas;
         this.typePrestation = typePrestation;
-        this.cocktailMaison = cocktailMaison;
         this.montantTraiteur = montantTraiteur;
         this.traiteur = traiteur;
         this.idContrat = idContrat;
+        this.cocktailMaison = cocktailMaison;
+    }
+
+    public Boolean getCocktailMaison() {
+        return cocktailMaison;
+    }
+
+    public void setCocktailMaison(Boolean cocktailMaison) {
+        this.cocktailMaison = cocktailMaison;
+    }
+
+    @Override
+    public String toString() {
+        return "Repas{" + "idRepas=" + idRepas + ", typePrestation=" + typePrestation + ", montantTraiteur=" + montantTraiteur + ", traiteur=" + traiteur + ", idContrat=" + idContrat + ", cocktailMaison=" + cocktailMaison + '}';
     }
 
     public int getIdRepas() {
@@ -36,10 +49,6 @@ public class Repas {
 
     public typePrestations getTypePrestation() {
         return typePrestation;
-    }
-
-    public boolean isCocktailMaison() {
-        return cocktailMaison;
     }
 
     public float getMontantTraiteur() {
@@ -62,10 +71,6 @@ public class Repas {
         this.typePrestation = typePrestation;
     }
 
-    public void setCocktailMaison(boolean cocktailMaison) {
-        this.cocktailMaison = cocktailMaison;
-    }
-
     public void setMontantTraiteur(float montantTraiteur) {
         this.montantTraiteur = montantTraiteur;
     }
@@ -77,10 +82,4 @@ public class Repas {
     public void setIdContrat(int idContrat) {
         this.idContrat = idContrat;
     }
-
-    @Override
-    public String toString() {
-        return "Repas{" + "idRepas=" + idRepas + ", typePrestation=" + typePrestation + ", cocktailMaison=" + cocktailMaison + ", montantTraiteur=" + montantTraiteur + ", traiteur=" + traiteur + ", idContrat=" + idContrat + '}';
-    }
-
 }

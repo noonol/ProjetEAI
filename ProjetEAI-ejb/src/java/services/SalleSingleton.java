@@ -5,9 +5,9 @@
  */
 package services;
 
-import enumeration.EnumCommunication;
-import enumeration.EnumDecoration;
-import enumeration.EnumSecurite;
+import enumerations.EnumCommunication;
+import enumerations.EnumDecoration;
+import enumerations.EnumSecurite;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.ejb.Singleton;
@@ -27,12 +27,12 @@ public class SalleSingleton {
     private final ArrayList<Salle> lesSalles = new ArrayList<>();
 
     public SalleSingleton() {
-        Salle salle = new Salle(1, "Salle de la déchéance", true, true, 3500);
-        Salle salle2 = new Salle(2, "Salle amalékoum", true, true, 2500);
-        Salle salle3 = new Salle(3, "Salle ami", true, false, 1500);
-        Salle salle4 = new Salle(4, "Salle add", true, false, 1500);
-        Salle salle5 = new Salle(5, "Salle histoire", false, false, 1000);
-        Salle salle6 = new Salle(6, "Salle cheap", false, false, 500);
+        Salle salle = new Salle(1, "Salle de la déchéance", true, true, 3500,300);
+        Salle salle2 = new Salle(2, "Salle amalékoum", true, true, 2500,250);
+        Salle salle3 = new Salle(3, "Salle ami", true, false, 1500,200);
+        Salle salle4 = new Salle(4, "Salle add", true, false, 1500,150);
+        Salle salle5 = new Salle(5, "Salle histoire", false, false, 1000,100);
+        Salle salle6 = new Salle(6, "Salle cheap", false, false, 500,50);
     }
 
     public ArrayList<Salle> getLesSalles() {

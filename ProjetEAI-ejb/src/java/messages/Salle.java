@@ -15,13 +15,17 @@ public class Salle {
     private boolean isEstrade;
     private boolean isGrandeCuisine;
     private float tarifS;
+    private int capaciteS;
+
     
-    public Salle(int idSalle, String nomSalle, boolean isEstrade, boolean isGrandeCuisine, float tarifS) {
+    
+    public Salle(int idSalle, String nomSalle, boolean isEstrade, boolean isGrandeCuisine, float tarifS, int capaciteS) {
         this.idSalle = idSalle;
         this.nomSalle = nomSalle;
         this.isEstrade = isEstrade;
         this.isGrandeCuisine = isGrandeCuisine;
         this.tarifS = tarifS;
+        this.capaciteS = capaciteS;
     }
 
     public int getIdSalle() {
@@ -63,10 +67,18 @@ public class Salle {
     public void setTarifS(float tarifS) {
         this.tarifS = tarifS;
     }
+    
+    public int getCapaciteS() {
+        return capaciteS;
+    }
+
+    public void setCapaciteS(int capaciteS) {
+        this.capaciteS = capaciteS;
+    }
 
     @Override
     public String toString() {
-        return "Salle{" + "idSalle=" + idSalle + ", nomSalle=" + nomSalle + ", isEstrade=" + isEstrade + ", isGrandeCuisine=" + isGrandeCuisine + ", tarifS=" + tarifS + '}';
+        return "Salle{" + "idSalle=" + idSalle + ", nomSalle=" + nomSalle + ", isEstrade=" + isEstrade + ", isGrandeCuisine=" + isGrandeCuisine + ", tarifS=" + tarifS + ", capacite=" + capaciteS + '}';
     }
     
 }

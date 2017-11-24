@@ -19,28 +19,37 @@ import messages.Repas;
 @LocalBean
 public class SingletonRepas {
 
-    private HashMap<Integer, Repas> repas;
+    private HashMap<Integer, Repas> lesRepas;
 
     public SingletonRepas() {
-        repas = new HashMap<>();
+        lesRepas = new HashMap<>();
     }
 
     public HashMap<Integer, Repas> getRepas() {
-        return repas;
+        return lesRepas;
     }
 
     public Repas getRepas(Integer idRepas) {
-        return repas.get(idRepas);
+        return lesRepas.get(idRepas);
     }
 
     public Repas getRepasDuContrat(Integer idContrat) {
         Repas MonRepas = null;
-        for (int i = 0; i < repas.size(); i++) {
-            if (repas.get(i).getIdContrat() == idContrat) {
-                MonRepas = repas.get(i);
+        for (int i = 0; i < lesRepas.size(); i++) {
+            if (lesRepas.get(i).getIdContrat() == idContrat) {
+                MonRepas = lesRepas.get(i);
             }
         }
         return MonRepas;
+    }
+
+    public Integer getSizeLesRepas() {
+        return lesRepas.size();
+    }
+
+    void add(Repas r) {
+        lesRepas.put(r.getIdContrat(), r);
+
     }
 
 }

@@ -5,9 +5,9 @@
  */
 package WebService;
 
-import enumeration.EnumCommunication;
-import enumeration.EnumDecoration;
-import enumeration.EnumSecurite;
+import enumerations.EnumCommunication;
+import enumerations.EnumDecoration;
+import enumerations.EnumSecurite;
 import enumerations.typePrestations;
 import exceptions.ExceptionTropicDejaUtilise;
 import java.util.Date;

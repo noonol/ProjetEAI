@@ -7,9 +7,9 @@ package services;
 
 import messages.Client;
 import messages.Contrat;
-import enumeration.EnumCommunication;
-import enumeration.EnumDecoration;
-import enumeration.EnumSecurite;
+import enumerations.EnumCommunication;
+import enumerations.EnumDecoration;
+import enumerations.EnumSecurite;
 import enumerations.EtatContrat;
 import exceptions.ExceptionTropicDejaUtilise;
 import java.io.Serializable;

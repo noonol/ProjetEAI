@@ -5,9 +5,9 @@
  */
 package services;
 
-import enumeration.EnumCommunication;
-import enumeration.EnumDecoration;
-import enumeration.EnumSecurite;
+import enumerations.EnumCommunication;
+import enumerations.EnumDecoration;
+import enumerations.EnumSecurite;
 import enumerations.EtatContrat;
 import java.util.ArrayList;
 import java.util.Date;

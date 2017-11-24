@@ -34,9 +34,9 @@ public class Contrat implements Serializable {
     private Salle salle;
     private typePrestations typePresta;
 
-    
-    
-    
+
+
+
     public EnumAnimation getAnimation() {
         return animation;
     }
@@ -171,5 +171,5 @@ public class Contrat implements Serializable {
     }
 
   
-    
+ 
 }

@@ -5,7 +5,7 @@
  */
 package services;
 
-import enumeration.EnumTypePersonne;
+import enumerations.EnumTypePersonne;
 import java.util.ArrayList;
 import javax.ejb.Singleton;
 import javax.ejb.LocalBean;
