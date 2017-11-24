@@ -5,7 +5,7 @@
  */
 package messages;
 
-import enumerations.EnumTypePersonne;
+import enumeration.EnumTypePersonne;
 
 /**
  *

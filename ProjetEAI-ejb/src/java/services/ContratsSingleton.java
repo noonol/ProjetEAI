@@ -5,10 +5,10 @@
  */
 package services;
 
-import enumerations.EnumCommunication;
-import enumerations.EnumDecoration;
-import enumerations.EnumSecurite;
-import enumerations.EtatContrat;
+import enumeration.EnumCommunication;
+import enumeration.EnumDecoration;
+import enumeration.EnumSecurite;
+import enumeration.EtatContrat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;

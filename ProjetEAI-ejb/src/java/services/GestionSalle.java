@@ -6,7 +6,7 @@
 package services;
 
 import exceptions.ExceptionAucuneSalleTrouvee;
-import enumerations.EtatContrat;
+import enumeration.EtatContrat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Singleton;

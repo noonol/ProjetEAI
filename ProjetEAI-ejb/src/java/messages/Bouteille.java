@@ -5,7 +5,7 @@
  */
 package messages;
 
-import enumerations.typeBouteille;
+import enumeration.typeBouteille;
 
 /**
  *

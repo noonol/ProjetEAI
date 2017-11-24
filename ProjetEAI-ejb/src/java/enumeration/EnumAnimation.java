@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package enumerations;
+package enumeration;
 
 /**
  *
- * @author Nolwenn PILLARD
+ * @author Marine
  */
-public enum typeMP {
-    canapé,
-    verrine, 
-    plat
+public enum EnumAnimation {
+    Disco,
+    DiscoAnimation,
+    Orchestre,
+    GroupeMusical,
+    PasdAnimation
 }

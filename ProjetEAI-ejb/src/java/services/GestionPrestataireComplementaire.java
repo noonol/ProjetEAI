@@ -7,8 +7,8 @@ package services;
 
 import enumeration.EnumSecurite;
 import enumeration.EnumTypePersonne;
-import enumerations.EnumAnimation;
-import enumerations.EtatContrat;
+import enumeration.EnumAnimation;
+import enumeration.EtatContrat;
 import exceptions.ExceptionPersonnelNonTrouve;
 import java.util.logging.Level;
 import java.util.logging.Logger;

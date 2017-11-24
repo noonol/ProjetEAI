@@ -5,16 +5,17 @@
  */
 package services;
 
+import enumeration.EnumAnimation;
 import javax.ejb.Singleton;
 import javax.ejb.LocalBean;
 
 import messages.Client;
 import messages.Contrat;
-import enumerations.EnumCommunication;
-import enumerations.EnumDecoration;
-import enumerations.EnumSecurite;
-import enumerations.EtatContrat;
-import enumerations.typePrestations;
+import enumeration.EnumCommunication;
+import enumeration.EnumDecoration;
+import enumeration.EnumSecurite;
+import enumeration.EtatContrat;
+import enumeration.typePrestations;
 import exceptions.ExceptionTropicDejaUtilise;
 import java.util.ArrayList;
 import java.util.Date;
@@ -74,9 +75,8 @@ public class ApplicationEmployes {
         // On crée un contrat pour en avoir un dans la liste de contrat 
         Date dateHeureDebut = new Date("20170101200000");
         Date dateHeureFin = new Date("20170102200000");
-        
-        Contrat c1 = new Contrat(1, EnumDecoration.simple, EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clients.getClient(1), EtatContrat.initialise, dateHeureDebut, dateHeureFin, salles.getSalle(1), typePrestations.assis, true);
-        contrats.add(c1);
+         Contrat c1 = new Contrat(1, EnumAnimation.Disco, EnumDecoration.simple,  EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clients.getClient(1),  EtatContrat.initialise, dateHeureDebut, dateHeureFin,  salles.getSalle(1),  typePrestations.assis);
+         contrats.add(c1);
 
         // On ajoute le contrat que l'on veux créer dans la liste des contrats
         Contrat c = new Contrat(idContrat, decoration, communication, securite, montantGlobal, nbPersonnes, leClient, EtatContrat.initialise, debut, fin, mySalle, type,cocktailMaison);

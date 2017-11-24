@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package enumerations;
+package enumeration;
 
 /**
  *
- * @author Rigal
+ * @author Nolwenn PILLARD
  */
-public enum EnumDecoration  {
-    simple, florale, pasDeDecoration
+public enum typeMP {
+    canapé,
+    verrine, 
+    plat
 }

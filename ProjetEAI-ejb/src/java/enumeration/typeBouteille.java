@@ -3,14 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package enumerations;
+package enumeration;
 
 /**
  *
- * @author Rigal
+ * @author Nolwenn PILLARD
  */
-public enum EnumCommunication {
-    photos,
-    videos,
-    photosVideos
+public enum typeBouteille {
+    eauPlate, 
+    eauGazeuse,
+    jusMultiFruits,
+    apero1,
+    apero2,
+    apero3,
+    vins
 }

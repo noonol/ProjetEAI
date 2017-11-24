@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package enumerations;
+package enumeration;
 
 /**
  *
  * @author Rigal
  */
-public enum EnumSecurite {
-    accesSalle,
-    gardiennageParking,
-    salleParking,
-    pasDeSecurite
+public enum EnumDecoration  {
+    simple, florale, pasDeDecoration
 }

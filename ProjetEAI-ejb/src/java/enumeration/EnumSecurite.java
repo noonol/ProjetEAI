@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package enumerations;
+package enumeration;
 
 /**
  *
- * @author Nolwenn PILLARD
+ * @author Rigal
  */
-public enum typeBouteille {
-    eauPlate, 
-    eauGazeuse,
-    jusMultiFruits,
-    apero1,
-    apero2,
-    apero3,
-    vins
+public enum EnumSecurite {
+    accesSalle,
+    gardiennageParking,
+    salleParking,
+    pasDeSecurite
 }

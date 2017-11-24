@@ -5,8 +5,8 @@
  */
 package services;
 
-import enumerations.EtatContrat;
-import enumerations.typePrestations;
+import enumeration.EtatContrat;
+import enumeration.typePrestations;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -8,9 +8,9 @@ package messages;
 import enumeration.EnumCommunication;
 import enumeration.EnumSecurite;
 import enumeration.EnumDecoration;
-import enumerations.EnumAnimation;
-import enumerations.EtatContrat;
-import enumerations.typePrestations;
+import enumeration.EnumAnimation;
+import enumeration.EtatContrat;
+import enumeration.typePrestations;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -34,6 +34,7 @@ public class Contrat implements Serializable {
     private Salle salle;
     private typePrestations typePresta;
 
+   
 
 
 
@@ -152,6 +153,9 @@ public class Contrat implements Serializable {
 
     public typePrestations getTypePresta() {
         return typePresta;
+    }
+ public Contrat(int i, EnumDecoration enumDecoration, EnumCommunication enumCommunication, EnumSecurite enumSecurite, float f, int i0, Client client, EtatContrat etatContrat, Date dateHeureDebut, Date dateHeureFin, Salle salle, typePrestations typePrestations, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public Contrat(int idContrat, EnumAnimation animation, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, EtatContrat etat, Date dateHeureDebut, Date dateHeureFin, Salle salle, typePrestations typePresta) {

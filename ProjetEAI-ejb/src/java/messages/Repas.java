@@ -5,7 +5,7 @@
  */
 package messages;
 
-import enumerations.typePrestations;
+import enumeration.typePrestations;
 import java.util.Objects;
 
 /**

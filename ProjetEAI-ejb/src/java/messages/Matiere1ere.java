@@ -5,7 +5,7 @@
  */
 package messages;
 
-import enumerations.typeMP;
+import enumeration.typeMP;
 
 /**
  *
