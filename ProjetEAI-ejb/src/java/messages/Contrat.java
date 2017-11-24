@@ -8,6 +8,7 @@ package messages;
 import enumeration.EnumCommunication;
 import enumeration.EnumSecurite;
 import enumeration.EnumDecoration;
+import enumerations.EnumAnimation;
 import enumerations.EtatContrat;
 import enumerations.typePrestations;
 import java.io.Serializable;
@@ -20,6 +21,7 @@ import java.util.Date;
 public class Contrat implements Serializable {
 
     private int idContrat;
+    private EnumAnimation animation;
     private EnumDecoration decoration;
     private EnumCommunication communication;
     private EnumSecurite securite;
@@ -32,6 +34,20 @@ public class Contrat implements Serializable {
     private Salle salle;
     private typePrestations typePresta;
 
+    
+    
+    
+    public EnumAnimation getAnimation() {
+        return animation;
+    }
+
+    public void setAnimation(EnumAnimation animation) {
+        this.animation = animation;
+    }
+    
+    
+    
+    
     public Salle getSalle() {
         return salle;
     }
@@ -138,8 +154,9 @@ public class Contrat implements Serializable {
         return typePresta;
     }
 
-    public Contrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, EtatContrat etat, Date dateHeureDebut, Date dateHeureFin, Salle salle, typePrestations typePresta) {
+    public Contrat(int idContrat, EnumAnimation animation, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, EtatContrat etat, Date dateHeureDebut, Date dateHeureFin, Salle salle, typePrestations typePresta) {
         this.idContrat = idContrat;
+        this.animation = animation;
         this.decoration = decoration;
         this.communication = communication;
         this.securite = securite;
@@ -152,5 +169,7 @@ public class Contrat implements Serializable {
         this.salle = salle;
         this.typePresta = typePresta;
     }
+
+  
     
 }

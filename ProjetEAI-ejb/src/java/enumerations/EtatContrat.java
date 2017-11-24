@@ -19,7 +19,10 @@ public enum EtatContrat {
     gestion_restauration_annuler,
     gestion_salle,
     gestion_personnel,
-    gestion_prestataire_complementaire,
+    gestion_personnel_creer,
+    gestion_personnel_annuler,
+    gestion_prestataire_complementaire_annuler,
+    gestion_prestataire_complementaire_creer,
     annulé,
     validé
    

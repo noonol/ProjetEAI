@@ -38,6 +38,9 @@ public class PersonnelSingleton {
         this.lesPersonnels.add(new Personnel(13, "Arnaud", EnumTypePersonne.preparateurCocktail, 18, "06 36 74 76 96"));
         this.lesPersonnels.add(new Personnel(14, "Le gars qui fait des cocktails dégueux", EnumTypePersonne.preparateurCocktail, 19, "06 36 74 76 96"));
         this.lesPersonnels.add(new Personnel(15, "Le gars qui est DJ mais ne veut pas animer", EnumTypePersonne.DJ, 28, "06 36 74 76 96"));
+        this.lesPersonnels.add(new Personnel(16, "Norman fait des videos", EnumTypePersonne.photographeVideaste, 28, "06 56 75 76 96"));
+        this.lesPersonnels.add(new Personnel(17, "Andy Warold", EnumTypePersonne.photographeVideaste, 38, "06 45 44 76 97"));
+        this.lesPersonnels.add(new Personnel(18, "Hulk", EnumTypePersonne.agentSecurite, 30, "06 86 54 25 69"));
   
     }
 

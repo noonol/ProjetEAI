@@ -12,5 +12,6 @@ package enumeration;
 public enum EnumSecurite {
     accesSalle,
     gardiennageParking,
-    salleParking
+    salleParking,
+    pasDeSecurite
 }

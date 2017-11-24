@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package enumeration;
+package exceptions;
 
 /**
  *
- * @author Rigal
+ * @author Marine
  */
-public enum EnumDecoration  {
-    simple, florale, pasDeDecoration
+public class ExceptionPrestataireNonTrouve extends Exception {
+    
 }

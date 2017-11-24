@@ -40,6 +40,7 @@ public class GestionProjet implements MessageListener {
 
     @Resource(lookup = "jms/TopicContrat")
     private Topic topic;
+    
     @Inject
     private JMSContext context;
 
