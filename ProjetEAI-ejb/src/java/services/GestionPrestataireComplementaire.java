@@ -8,8 +8,6 @@ package services;
 import enumeration.EnumSecurite;
 import enumeration.EnumTypePersonne;
 import enumeration.EnumAnimation;
-import enumeration.EnumCommunication;
-import enumeration.EnumDecoration;
 import enumeration.EtatContrat;
 import exceptions.ExceptionPersonnelNonTrouve;
 import java.util.logging.Level;
@@ -77,7 +75,7 @@ private final float montantSAGEM = 306.5f;
                                 } 
                         }
                         try {
-                          //  c.setEtat(EtatContrat.gestion_personnel_creer);
+                            c.setEtat(EtatContrat.gestion_personnel_creer);
                             ObjectMessage o = context.createObjectMessage(c);
                             context.createProducer().send(topic, o);
                             gestionPersonnel.prévoirPersonnel(EnumTypePersonne.agentSecurite, effectif);    
@@ -86,7 +84,7 @@ private final float montantSAGEM = 306.5f;
                         }
                         //DJ ou DJ animateur ou ornement basique ou photo ou video ///////////////////////////////////////////////////////////////
                         if (c.getAnimation().equals(EnumAnimation.Disco)){
-                           //  c.setEtat(EtatContrat.gestion_personnel_creer);
+                             c.setEtat(EtatContrat.gestion_personnel_creer);
                             ObjectMessage o = context.createObjectMessage(c);
                             context.createProducer().send(topic, o);
                             try {
@@ -96,7 +94,7 @@ private final float montantSAGEM = 306.5f;
                             }
                         }
                         if (c.getAnimation().equals(EnumAnimation.DiscoAnimation)){
-                          //   c.setEtat(EtatContrat.gestion_personnel_creer);
+                             c.setEtat(EtatContrat.gestion_personnel_creer);
                             ObjectMessage o = context.createObjectMessage(c);
                             context.createProducer().send(topic, o);
                             try {
@@ -105,30 +103,6 @@ private final float montantSAGEM = 306.5f;
                                 Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
-                         if (c.getDecoration().equals(EnumDecoration.simple)){
-                          //   c.setEtat(EtatContrat.gestion_personnel_creer);
-                            ObjectMessage o = context.createObjectMessage(c);
-                            context.createProducer().send(topic, o);
-                            try {
-                                gestionPersonnel.prévoirPersonnel(EnumTypePersonne.decoratrice, 1);
-                            } catch (ExceptionPersonnelNonTrouve ex) {
-                                Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                        if (c.getCommunication().equals(EnumCommunication.photos)
-                        ||c.getCommunication().equals(EnumCommunication.photosVideos)
-                                || c.getCommunication().equals(EnumCommunication.photos)
-                                ){
-                           //  c.setEtat(EtatContrat.gestion_personnel_creer);
-                            ObjectMessage o = context.createObjectMessage(c);
-                            context.createProducer().send(topic, o);
-                            try {
-                                gestionPersonnel.prévoirPersonnel(EnumTypePersonne.photographeVideaste, 1);
-                            } catch (ExceptionPersonnelNonTrouve ex) {
-                                Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                        // Orchestre ou Groupe de Musique /////////////////////////////////////////
                         if (c.getAnimation().equals(EnumAnimation.Orchestre)){
                             boolean personneDispo = true;
                             boolean personneTrouvee = false;
@@ -150,12 +124,12 @@ private final float montantSAGEM = 306.5f;
                             }
                             
                         }
-                        if (c.getAnimation().equals(EnumAnimation.GroupeMusical)){
+                        if (c.getAnimation().equals(EnumAnimation.Orchestre)){
                             boolean personneDispo = true;
                             boolean personneTrouvee = false;
                             for ( Prestataire p : prestataires.getPrestataire()){
                                  personneDispo = true;
-                                if( p.getType().equals(EnumTypePersonne.groupeDeMusique) && !personneTrouvee ){
+                                if( p.getType().equals(EnumTypePersonne.orchestre) && !personneTrouvee ){
                                     for(Planning pa : plannings.getPlanning() ){
                                         if(pa.getLaPersonne().equals(p)
                                          && c.getDateHeureDebut().compareTo(pa.getDateHeureDebut()) >= 0
@@ -169,27 +143,7 @@ private final float montantSAGEM = 306.5f;
                                     plannings.addPlanning(new Planning(c.getDateHeureDebut(), c.getDateHeureFin(), p, c, c.getSalle()));
                                 }
                             }
-                        }
-                        //fleuriste
-                        if (c.getDecoration().equals(EnumDecoration.florale)){
-                            boolean personneDispo = true;
-                            boolean personneTrouvee = false;
-                            for ( Prestataire p : prestataires.getPrestataire()){
-                                 personneDispo = true;
-                                if( p.getType().equals(EnumTypePersonne.fleuriste) && !personneTrouvee ){
-                                    for(Planning pa : plannings.getPlanning() ){
-                                        if(pa.getLaPersonne().equals(p)
-                                         && c.getDateHeureDebut().compareTo(pa.getDateHeureDebut()) >= 0
-                                         && c.getDateHeureFin().compareTo(pa.getDateHeureFin()) <= 0){
-                                        personneDispo = false; 
-                                    }
-                                    }
-                                }
-                                if(personneDispo && !personneTrouvee ){
-                                    personneTrouvee = true;
-                                    plannings.addPlanning(new Planning(c.getDateHeureDebut(), c.getDateHeureFin(), p, c, c.getSalle()));
-                                }
-                            }
+                            
                         }
                         
                         
