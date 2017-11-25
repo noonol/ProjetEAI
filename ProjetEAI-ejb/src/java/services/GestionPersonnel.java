@@ -6,9 +6,7 @@
 package services;
 
 import enumeration.EnumTypePersonne;
-import enumeration.EtatContrat;
 import exceptions.ExceptionPersonnelNonTrouve;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -19,7 +17,6 @@ import javax.inject.Inject;
 import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
-import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 import javax.jms.Topic;
 import messages.Contrat;
@@ -44,7 +41,8 @@ public class GestionPersonnel   {
     @EJB
     PlanningSingleton planning;  
     
-    public void prévoirPersonnel(EnumTypePersonne type, int effectif) throws ExceptionPersonnelNonTrouve {
+    public float prévoirPersonnel(EnumTypePersonne type, int effectif) throws ExceptionPersonnelNonTrouve {
+        float retour = 0.0f;
         Message m = context.createConsumer(topic).receive();
         //Récupération du contrat
         if (m instanceof ObjectMessage) {
@@ -52,6 +50,7 @@ public class GestionPersonnel   {
                  ObjectMessage om = (ObjectMessage) m;
                  Object obj = om.getObject();
                  if (obj instanceof Contrat) {
+                     
                      Contrat c = (Contrat) obj;
                      int e = effectif;
                      for (int i= 0; i < personnel.getPersonnel().size()&&e!=0;i++){
@@ -69,6 +68,7 @@ public class GestionPersonnel   {
                              //si la personne est libre, on la reserve sur le creneaux
                              if(!personnePasDispo && e!=0){
                                  planning.addPlanning(new Planning(c.getDateHeureDebut(), c.getDateHeureFin(), p, c, c.getSalle()));
+                                 retour +=p.getTarif();
                                  e=-1;
                              }
                          }
@@ -82,6 +82,7 @@ public class GestionPersonnel   {
                  Logger.getLogger(GestionProjet.class.getName()).log(Level.SEVERE, null, ex);
              }
         }
+    return retour;
     }
     
 

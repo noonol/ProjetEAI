@@ -8,6 +8,8 @@ package services;
 import enumeration.EnumSecurite;
 import enumeration.EnumTypePersonne;
 import enumeration.EnumAnimation;
+import enumeration.EnumCommunication;
+import enumeration.EnumDecoration;
 import enumeration.EtatContrat;
 import exceptions.ExceptionPersonnelNonTrouve;
 import java.util.logging.Level;
@@ -46,7 +48,7 @@ private final float montantSAGEM = 306.5f;
     private JMSContext context;
     @Override
     public void onMessage(Message message) {
-        
+      
       if (message instanceof ObjectMessage) {
             try {
                 ObjectMessage om = (ObjectMessage) message;
@@ -54,6 +56,7 @@ private final float montantSAGEM = 306.5f;
                 if (obj instanceof Contrat) {
                     Contrat c = (Contrat) obj;
                     if (c.getEtat().equals(EtatContrat.gestion_prestataire_complementaire_creer)) {
+                        float montantSup = 0.0f;
                         int effectif = 0 ;
                         //Partie sécurité ///////////////////////////////////////////////////////////////
                         if(c.getSecurite().equals(EnumSecurite.accesSalle)
@@ -75,34 +78,80 @@ private final float montantSAGEM = 306.5f;
                                 } 
                         }
                         try {
-                            c.setEtat(EtatContrat.gestion_personnel_creer);
+                          //  c.setEtat(EtatContrat.gestion_personnel_creer);
                             ObjectMessage o = context.createObjectMessage(c);
                             context.createProducer().send(topic, o);
-                            gestionPersonnel.prévoirPersonnel(EnumTypePersonne.agentSecurite, effectif);    
+                            montantSup += gestionPersonnel.prévoirPersonnel(EnumTypePersonne.agentSecurite, effectif);    
                         } catch (ExceptionPersonnelNonTrouve ex) {
-                            
+                                try {
+                                    throw new ExceptionPersonnelNonTrouve();
+                                } catch (ExceptionPersonnelNonTrouve ex1) {
+                                    Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex1);
+                                }
                         }
                         //DJ ou DJ animateur ou ornement basique ou photo ou video ///////////////////////////////////////////////////////////////
                         if (c.getAnimation().equals(EnumAnimation.Disco)){
-                             c.setEtat(EtatContrat.gestion_personnel_creer);
+                            // c.setEtat(EtatContrat.gestion_personnel_creer);
                             ObjectMessage o = context.createObjectMessage(c);
                             context.createProducer().send(topic, o);
                             try {
-                                gestionPersonnel.prévoirPersonnel(EnumTypePersonne.DJ, 1);
+                                montantSup+=gestionPersonnel.prévoirPersonnel(EnumTypePersonne.DJ, 1);
+                                montantSup += montantSAGEM;
                             } catch (ExceptionPersonnelNonTrouve ex) {
-                                Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex);
+                                try {
+                                    throw new ExceptionPersonnelNonTrouve();
+                                } catch (ExceptionPersonnelNonTrouve ex1) {
+                                    Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex1);
+                                }
                             }
                         }
                         if (c.getAnimation().equals(EnumAnimation.DiscoAnimation)){
-                             c.setEtat(EtatContrat.gestion_personnel_creer);
+                            // c.setEtat(EtatContrat.gestion_personnel_creer);
                             ObjectMessage o = context.createObjectMessage(c);
                             context.createProducer().send(topic, o);
                             try {
-                                gestionPersonnel.prévoirPersonnel(EnumTypePersonne.DJanimateur, 1);
+                                montantSup+=gestionPersonnel.prévoirPersonnel(EnumTypePersonne.DJanimateur, 1);
+                                 montantSup += montantSAGEM;
                             } catch (ExceptionPersonnelNonTrouve ex) {
-                                Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex);
+                                 try {
+                                    throw new ExceptionPersonnelNonTrouve();
+                                } catch (ExceptionPersonnelNonTrouve ex1) {
+                                    Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex1);
+                                }
                             }
                         }
+                        if (c.getDecoration().equals(EnumDecoration.simple)){
+                            // c.setEtat(EtatContrat.gestion_personnel_creer);
+                            ObjectMessage o = context.createObjectMessage(c);
+                            context.createProducer().send(topic, o);
+                            try {
+                                montantSup+=gestionPersonnel.prévoirPersonnel(EnumTypePersonne.fleuriste, 1);
+                                 montantSup += montantSAGEM;
+                            } catch (ExceptionPersonnelNonTrouve ex) {
+                                try {
+                                    throw new ExceptionPersonnelNonTrouve();
+                                } catch (ExceptionPersonnelNonTrouve ex1) {
+                                    Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex1);
+                                }
+                            }
+                        }
+                        if (c.getCommunication().equals(EnumCommunication.photos)|| c.getCommunication().equals(EnumCommunication.videos)||c.getCommunication().equals(EnumCommunication.photosVideos)){
+                            // c.setEtat(EtatContrat.gestion_personnel_creer);
+                            ObjectMessage o = context.createObjectMessage(c);
+                            context.createProducer().send(topic, o);
+                            
+                            try {
+                                montantSup+=gestionPersonnel.prévoirPersonnel(EnumTypePersonne.photographeVideaste, 1);
+                            } catch (ExceptionPersonnelNonTrouve ex) {
+                                 try {
+                                    throw new ExceptionPersonnelNonTrouve();
+                                } catch (ExceptionPersonnelNonTrouve ex1) {
+                                    Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex1);
+                                }
+                            }
+                                 montantSup += montantSAGEM;
+                        }
+                        //Orchestre ou Groupe
                         if (c.getAnimation().equals(EnumAnimation.Orchestre)){
                             boolean personneDispo = true;
                             boolean personneTrouvee = false;
@@ -120,16 +169,24 @@ private final float montantSAGEM = 306.5f;
                                 if(personneDispo && !personneTrouvee ){
                                     personneTrouvee = true;
                                     plannings.addPlanning(new Planning(c.getDateHeureDebut(), c.getDateHeureFin(), p, c, c.getSalle()));
+                                    montantSup +=p.getTarif();
+                                }
+                            }
+                            if (!personneTrouvee){
+                                try {
+                                    throw new ExceptionPersonnelNonTrouve();
+                                } catch (ExceptionPersonnelNonTrouve ex1) {
+                                    Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex1);
                                 }
                             }
                             
                         }
-                        if (c.getAnimation().equals(EnumAnimation.Orchestre)){
+                        if (c.getAnimation().equals(EnumAnimation.GroupeMusical)){
                             boolean personneDispo = true;
                             boolean personneTrouvee = false;
                             for ( Prestataire p : prestataires.getPrestataire()){
                                  personneDispo = true;
-                                if( p.getType().equals(EnumTypePersonne.orchestre) && !personneTrouvee ){
+                                if( p.getType().equals(EnumTypePersonne.groupeDeMusique) && !personneTrouvee ){
                                     for(Planning pa : plannings.getPlanning() ){
                                         if(pa.getLaPersonne().equals(p)
                                          && c.getDateHeureDebut().compareTo(pa.getDateHeureDebut()) >= 0
@@ -141,17 +198,55 @@ private final float montantSAGEM = 306.5f;
                                 if(personneDispo && !personneTrouvee ){
                                     personneTrouvee = true;
                                     plannings.addPlanning(new Planning(c.getDateHeureDebut(), c.getDateHeureFin(), p, c, c.getSalle()));
+                                    montantSup +=p.getTarif();
                                 }
                             }
-                            
+                            if (!personneTrouvee){
+                                try {
+                                    throw new ExceptionPersonnelNonTrouve();
+                                } catch (ExceptionPersonnelNonTrouve ex1) {
+                                    Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex1);
+                                }
+                            }
                         }
-                        
-                        
+                        //fleuriste 
+                        if (c.getDecoration().equals(EnumDecoration.florale)){
+                            boolean personneDispo = true;
+                            boolean personneTrouvee = false;
+                            for ( Prestataire p : prestataires.getPrestataire()){
+                                 personneDispo = true;
+                                if( p.getType().equals(EnumTypePersonne.fleuriste) && !personneTrouvee ){
+                                    for(Planning pa : plannings.getPlanning() ){
+                                        if(pa.getLaPersonne().equals(p)
+                                         && c.getDateHeureDebut().compareTo(pa.getDateHeureDebut()) >= 0
+                                         && c.getDateHeureFin().compareTo(pa.getDateHeureFin()) <= 0){
+                                        personneDispo = false; 
+                                    }
+                                    }
+                                }
+                                if(personneDispo && !personneTrouvee ){
+                                    personneTrouvee = true;
+                                    plannings.addPlanning(new Planning(c.getDateHeureDebut(), c.getDateHeureFin(), p, c, c.getSalle()));
+                                    montantSup +=p.getTarif();
+                                }
+                            }
+                            if (!personneTrouvee){
+                                try {
+                                    throw new ExceptionPersonnelNonTrouve();
+                                } catch (ExceptionPersonnelNonTrouve ex1) {
+                                    Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex1);
+                                }
+                            }
+                        }
+                     c.setMontantGlobal(c.getMontantGlobal()+montantSup);
+                     c.setEtat(enumeration.EtatContrat.validé);
+                     ObjectMessage o = context.createObjectMessage(c);
+                     context.createProducer().send(topic, o);  
                     }
                 }
             } catch (JMSException ex) {
-              Logger.getLogger(GestionPrestataireComplementaire.class.getName()).log(Level.SEVERE, null, ex);
-          }
+            }
+        
       }    
            
     }
