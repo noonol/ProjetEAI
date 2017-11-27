@@ -24,6 +24,7 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
+import javax.jms.Queue;
 import javax.jms.Topic;
 import messages.Contrat;
 import messages.Planning;
@@ -46,6 +47,8 @@ private final float montantSAGEM = 306.5f;
     PlanningSingleton plannings;
     @Inject    
     private JMSContext context;
+    @Resource(lookup = "jms/montantPrevuFile")
+    private Queue file;
     @Override
     public void onMessage(Message message) {
       
@@ -238,10 +241,11 @@ private final float montantSAGEM = 306.5f;
                                 }
                             }
                         }
-                     c.setMontantGlobal(c.getMontantGlobal()+montantSup);
-                     c.setEtat(enumeration.EtatContrat.validé);
-                     ObjectMessage o = context.createObjectMessage(c);
-                     context.createProducer().send(topic, o);  
+                    c.setEtat(enumeration.EtatContrat.validé);
+                    ObjectMessage o = context.createObjectMessage(c);
+                    context.createProducer().send(topic, o);  
+                     o = context.createObjectMessage(montantSup);
+                    context.createProducer().send(file, o);  
                     }
                 }
             } catch (JMSException ex) {

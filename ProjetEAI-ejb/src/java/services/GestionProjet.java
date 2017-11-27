@@ -23,6 +23,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.jms.Topic;
+import javax.jms.Queue;
 
 import javax.jms.JMSContext;
 import javax.jms.JMSException;
@@ -40,7 +41,10 @@ public class GestionProjet implements MessageListener {
 
     @Resource(lookup = "jms/TopicContrat")
     private Topic topic;
-    
+
+    @Resource(lookup = "jms/montantPrevuFile")
+    private Queue file;
+
     @Inject
     private JMSContext context;
 
@@ -57,12 +61,12 @@ public class GestionProjet implements MessageListener {
                     Contrat c = (Contrat) obj;
                     if (c.getEtat().equals(EtatContrat.validé)) {
                         int idC = c.getIdContrat();
+
                         for (int i = 0; i < contrats.getSizeContrat(); i++) {
                             // ATTENTION : la taille est différente de l'id donc ca peut lever une exception : plutot faire la recherhche sur l'id
                             if (contrats.getContrat(i).getIdContrat() == idC) {
-                                // ZZZ MARINE contrats.add(i, c);
+                                // Mise à jour du contrat, une fois qu'il est validé
                                 contrats.add(c);
-                                // J'ai pas réussi à comprendre pourquoi on parcours la liste des contrats et on ajoute dans la meme liste les contrats ... Si tu peux y jeter un oeil :)
                             }
                         }
                         System.out.println("Contrat validé !");
@@ -72,11 +76,33 @@ public class GestionProjet implements MessageListener {
                         montantPrevu = c.getMontantGlobal();
                         // TODO NOL
                     }
+                } else if (obj instanceof Float) {
+
+                    Message m = context.createConsumer(topic).receive();
+                    //Récupération du contrat
+                    if (m instanceof ObjectMessage) {
+                        try {
+                            ObjectMessage omg = (ObjectMessage) m;
+                            Object objet = omg.getObject();
+                            if (objet instanceof Contrat) {
+                                Contrat c = (Contrat) objet;
+                                float montant = (float) obj;
+                                c.setMontantGlobal(c.getMontantGlobal() + montant);
+                                contrats.add(c);
+                                ObjectMessage o = context.createObjectMessage(c);
+                                context.createProducer().send(topic, o);
+                            }
+
+                        } catch (Exception e) {
+
+                        }
+
+                    }
                 }
             } catch (JMSException ex) {
                 Logger.getLogger(GestionProjet.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }
-
 }

@@ -21,6 +21,7 @@ import java.util.Date;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
+import javax.jms.Queue;
 import javax.jms.Topic;
 import messages.Contrat;
 import messages.Salle;
@@ -45,7 +46,8 @@ public class GestionSalle {
     private Topic topic;
     @Inject
     private JMSContext context;
-    
+     @Resource(lookup = "jms/montantPrevuFile")
+    private Queue file;
     /*@Override
     public void onMessage(Message message) {
         if (message instanceof ObjectMessage) {
@@ -67,13 +69,14 @@ public class GestionSalle {
         }
     }//fin onMessage*/
     
-    public void reserverSalle(Contrat unContrat) throws ExceptionAucuneSalleTrouvee{
+    public String reserverSalle(Contrat unContrat) throws ExceptionAucuneSalleTrouvee{
         //Dans Planning
             //si je trouve un creneau libre correspondant à celui du contrat
                 //alors je mets à jour le planning en mettant le créneau comme occupé
                 // et j'envoie confirmationRéservation à la gestion de projets
             //sinon je retourne une erreur "aucun créneau correspondant n'est dispo
         Message m = context.createConsumer(topic).receive();
+        String nomSalle = "";
         if (m instanceof ObjectMessage) {
             try {
                 ObjectMessage om = (ObjectMessage) m;
@@ -95,7 +98,13 @@ public class GestionSalle {
                                 unContrat.setSalle(s);
                                 ObjectMessage omToSend = context.createObjectMessage(unContrat);
                                 context.createProducer().send(topic, omToSend);
-                                confirmationReservation(unContrat);
+                                
+                                // Nolwenn !!! :) Ici on envois le montant à la file que gestion de projet récupérera
+                                omToSend = context.createObjectMessage(s.getTarifS());
+                                context.createProducer().send(file, omToSend);
+                                nomSalle = s.getNomSalle();
+                                ///////////////////////////////////////////////////////////////////////////////////
+                                
                                 sallechoisie = s;
                             }
                         }
@@ -111,13 +120,8 @@ public class GestionSalle {
                 Logger.getLogger(GestionProjet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }       
-         
+       return nomSalle;  
     }
-    
-    public void confirmationReservation(Contrat unContrat){
-        //envoi du nom de la salle et du montant global du contrat à la gestion de projets
-        unContrat.getMontantGlobal();
-        unContrat.getSalle().getNomSalle();
-    }
+  
     
 }
