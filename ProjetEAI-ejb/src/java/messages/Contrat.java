@@ -19,7 +19,6 @@ import java.util.Date;
  * @author Rigal
  */
 public class Contrat implements Serializable {
-
     private int idContrat;
     private EnumAnimation animation;
     private EnumDecoration decoration;
@@ -33,8 +32,39 @@ public class Contrat implements Serializable {
     private Date dateHeureFin;
     private Salle salle;
     private typePrestations typePresta;
-
+private boolean cocktailMaison;
    
+    public boolean isCocktailMaison() {
+        return cocktailMaison;
+    }
+
+    public void setCocktailMaison(boolean cocktailMaison) {
+        this.cocktailMaison = cocktailMaison;
+    }
+
+    public Contrat(int idContrat, EnumAnimation animation, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, EtatContrat etat, Date dateHeureDebut, Date dateHeureFin, Salle salle, typePrestations typePresta, boolean cocktailMaison) {
+        this.idContrat = idContrat;
+        this.animation = animation;
+        this.decoration = decoration;
+        this.communication = communication;
+        this.securite = securite;
+        this.montantGlobal = montantGlobal;
+        this.nbPersonnes = nbPersonnes;
+        this.leClient = leClient;
+        this.etat = etat;
+        this.dateHeureDebut = dateHeureDebut;
+        this.dateHeureFin = dateHeureFin;
+        this.salle = salle;
+        this.typePresta = typePresta;
+        this.cocktailMaison = cocktailMaison;
+    }
+
+    @Override
+    public String toString() {
+        return "Contrat{" + "idContrat=" + idContrat + ", animation=" + animation + ", decoration=" + decoration + ", communication=" + communication + ", securite=" + securite + ", montantGlobal=" + montantGlobal + ", nbPersonnes=" + nbPersonnes + ", leClient=" + leClient + ", etat=" + etat + ", dateHeureDebut=" + dateHeureDebut + ", dateHeureFin=" + dateHeureFin + ", salle=" + salle + ", typePresta=" + typePresta + ", cocktailMaison=" + cocktailMaison + '}';
+    }
+
+
 
 
 
@@ -139,14 +169,6 @@ public class Contrat implements Serializable {
         this.leClient = leClient;
     }
 
-    @Override
-    public String toString() {
-        return "Contrat{" + "idContrat=" + idContrat + ", decoration=" + decoration + ", communication=" + communication + ", securite=" + securite + ", montantGlobal=" + montantGlobal + ", nbPersonnes=" + nbPersonnes + ", leClient=" + leClient + ", etat=" + etat + ", dateHeureDebut=" + dateHeureDebut + ", dateHeureFin=" + dateHeureFin + ", salle=" + salle + ", typePresta=" + typePresta + '}';
-    }
-
-
-  
-
     public void setTypePresta(typePrestations typePresta) {
         this.typePresta = typePresta;
     }
@@ -154,26 +176,5 @@ public class Contrat implements Serializable {
     public typePrestations getTypePresta() {
         return typePresta;
     }
- public Contrat(int i, EnumDecoration enumDecoration, EnumCommunication enumCommunication, EnumSecurite enumSecurite, float f, int i0, Client client, EtatContrat etatContrat, Date dateHeureDebut, Date dateHeureFin, Salle salle, typePrestations typePrestations, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    public Contrat(int idContrat, EnumAnimation animation, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, EtatContrat etat, Date dateHeureDebut, Date dateHeureFin, Salle salle, typePrestations typePresta) {
-        this.idContrat = idContrat;
-        this.animation = animation;
-        this.decoration = decoration;
-        this.communication = communication;
-        this.securite = securite;
-        this.montantGlobal = montantGlobal;
-        this.nbPersonnes = nbPersonnes;
-        this.leClient = leClient;
-        this.etat = etat;
-        this.dateHeureDebut = dateHeureDebut;
-        this.dateHeureFin = dateHeureFin;
-        this.salle = salle;
-        this.typePresta = typePresta;
-    }
-
-  
- 
 }

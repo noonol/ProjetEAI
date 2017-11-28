@@ -39,22 +39,22 @@ import messages.Salle;
 @Singleton
 @LocalBean
 public class ApplicationEmployes {
-    
+
     @Resource(lookup = "jms/TopicContrat")
     private Topic topic;
     @Inject
     private JMSContext context;
-    
+
     @EJB
     ClientsSingleton clients;
-    
+
     @EJB
     ContratsSingleton contrats;
-    
+
     @EJB
     SalleSingleton salles;
-    
-    public void creerContrat(int idContrat, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, Date debut, Date fin, Salle mySalle, typePrestations type, Boolean cocktailMaison) throws ExceptionTropicDejaUtilise {
+
+    public void creerContrat(int idContrat, EnumAnimation animation, EnumDecoration decoration, EnumCommunication communication, EnumSecurite securite, float montantGlobal, int nbPersonnes, Client leClient, Date debut, Date fin, Salle mySalle, typePrestations type, Boolean cocktailMaison) throws ExceptionTropicDejaUtilise {
         // On test qu'on n'a pas déjà un contrat en cours de traitement dans le Topic, avant d'en traiter un autre
         Message m = context.createConsumer(topic).receive();
         boolean stop = false;
@@ -75,17 +75,17 @@ public class ApplicationEmployes {
         // On crée un contrat pour en avoir un dans la liste de contrat 
         Date dateHeureDebut = new Date("20170101200000");
         Date dateHeureFin = new Date("20170102200000");
-         Contrat c1 = new Contrat(1, EnumAnimation.Disco, EnumDecoration.simple,  EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clients.getClient(1),  EtatContrat.initialise, dateHeureDebut, dateHeureFin,  salles.getSalle(1),  typePrestations.assis);
-         contrats.add(c1);
+        Contrat c1 = new Contrat(1, EnumAnimation.Disco, EnumDecoration.simple, EnumCommunication.videos, EnumSecurite.accesSalle, 456.70f, 70, clients.getClient(1), EtatContrat.initialise, dateHeureDebut, dateHeureFin, salles.getSalle(1), typePrestations.assis, true);
+        contrats.add(c1);
 
         // On ajoute le contrat que l'on veux créer dans la liste des contrats
-        Contrat c = new Contrat(idContrat, decoration, communication, securite, montantGlobal, nbPersonnes, leClient, EtatContrat.initialise, debut, fin, mySalle, type,cocktailMaison);
+        Contrat c = new Contrat(idContrat, animation, decoration, communication, securite, montantGlobal, nbPersonnes, leClient, EtatContrat.initialise, debut, fin, mySalle, type, cocktailMaison);
         c.setEtat(EtatContrat.gestion_projet);
         ObjectMessage om = context.createObjectMessage(c);
         context.createProducer().send(topic, om);
         // salle.reserver();
         contrats.add(c);
-        
+
     }
-    
+
 }
