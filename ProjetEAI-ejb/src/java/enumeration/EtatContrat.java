@@ -9,7 +9,7 @@ package enumeration;
  *
  * @author Marine
  */
-public enum EtatContrat {
+public enum EtatContrat { // l'etat correspond à le gestion qui l'envoie ex pour créer un contrat : GestionProjet -> GestionRestauration : etat : gestion_projet_creer
     initialise,
     //quand l'état par gestion, c'est à dire qu'il est utilisé par un bean en particulier
     gestion_projet,
