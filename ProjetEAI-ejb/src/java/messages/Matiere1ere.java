@@ -29,11 +29,11 @@ public class Matiere1ere {
         return idMP;
     }
 
-    public int getNbStock() {
+    public int getNbStockMp() {
         return nbStock;
     }
 
-    public float getPrixMP() {
+    public float getPrixM() {
         return prixMP;
     }
 

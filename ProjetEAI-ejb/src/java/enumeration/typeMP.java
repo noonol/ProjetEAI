@@ -12,5 +12,5 @@ package enumeration;
 public enum typeMP {
     canapé,
     verrine, 
-    plat
+    platFroid
 }
