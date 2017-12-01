@@ -1,16 +1,103 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Event Easier</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">      
     </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+
+    <div class="container">
+        <!--<div class="row vertical-offset-100">
+            <div class="col-md-4 col-md-offset-4">-->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">EventEasier - Créer un contrat</h3>
+            </div>
+            <div class="panel-body">
+                <form accept-charset="UTF-8" role="form">
+                    <fieldset>
+                        <div class="form-inline">
+                            <label>Nom et coordonnées du client :</label>
+                            <input class="form-control" name="nomCoordonnees"></br></br>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline"><label>Appellation manifestation :</label>
+                                <input class="form-control" name="nomManif"></div></br>
+                            <label>Type de manifestation :</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Familiale</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Associative</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Professionnelle</label></br>
+                            <div class="form-inline"><label>Nombre de participants (prévisionnel) :</label>
+                                <input class="form-control" name="nbParticipantsPrevisionnel" placeholder=".. / .."></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-inline"><label>Date manifestation :</label>
+                                <input class="form-control" name="dateManif" placeholder="DD/MM/YYYY"></div>
+                            </br>
+                            <label>Début manifestation : </label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">11h</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">18h</label>
+                            </br>
+                            <label>Fin manifestation : </label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">18h</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">00h</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">03h</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Type de prestation(s) :</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Cocktail seul</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Lunch</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Repas assis</label>	
+                            </br>	
+                            <label>Boissons cocktail :</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Cocktail préparé</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">3 apéritifs</label>
+                            </br>	
+                            <label>Vins Lunch :</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Blanc sec</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Rouge</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Rosé</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Crémant</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Champagne</label>
+                        </div>
+
+                        <div class="form-group">	
+                            <label>Animation(s) :</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Disco</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Disco et animation</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Orchestre</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Groupe musical</label>
+                            </br>
+                            <label>Prestation de décoration :</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Ornementation basique</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Décoration florale</label>
+                            </br>
+                            <label>Prestation communication post-évènementielle :</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Photos</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Vidéos</label>
+                            </br>
+                            <label>Prestation(s) sécurité :</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Accès salle</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="">Gardiennage parking</label>
+                        </div>
+                        <div>	
+                            <form action="/ProjetEAI-war/ApplicationEmployes" method="get">
+                          
+                                <input class="btn btn-lg btn-block btn-info"  type="submit" name="type" value="CreerContrat">
+                            </form>
+                            
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <!--</div>
+    </div>-->
+        </div>
+    </div>      
 </html>
