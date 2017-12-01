@@ -7,90 +7,98 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">      
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>         
+
+        <script type="text/javascript" src="creerContrat.js"></script>
+
     </head>
+    <body>
+        <div ng-app="app">
+            <div class="container" ng-controller="MonCtrl">
+                <!--<div class="row vertical-offset-100">
+                    <div class="col-md-4 col-md-offset-4">-->
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">EventEasier - Créer un contrat</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form accept-charset="UTF-8" role="form">
+                            <fieldset>
+                                <div class="form-inline">
+                                    <label>Nom et coordonnées du client :</label>
+                                    <input class="form-control" name="nomCoordonnees" ng-model="nomCoordonnees"></br></br>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-inline"><label>Appellation manifestation :</label>
+                                        <input class="form-control" name="nomManif" ng-model="nomManif"></div></br>
+                                    <label>Type de manifestation :</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="familiale">Familiale</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="associative">Associative</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="professionnelle">Professionnelle</label></br>
+                                    <div class="form-inline"><label>Nombre de participants (prévisionnel) :</label>
+                                        <input class="form-control" name="nbParticipantsPrevisionnel" placeholder=".. / .." ng-model="nbParticipants"></div>
+                                </div>
 
-    <div class="container">
-        <!--<div class="row vertical-offset-100">
-            <div class="col-md-4 col-md-offset-4">-->
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">EventEasier - Créer un contrat</h3>
+                                <div class="form-group">
+                                    <div class="form-inline"><label>Date manifestation :</label>
+                                        <input class="form-control" name="dateManif" placeholder="DD/MM/YYYY" ng-model="dateManif"></div>
+                                    </br>
+                                    <label>Début manifestation : </label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="debut11">11h</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="debut18">18h</label>
+                                    </br>
+                                    <label>Fin manifestation : </label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="fin18">18h</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="fin00">00h</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="fin03">03h</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Type de prestation(s) :</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="cocktailSeul">Cocktail seul</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="lunch">Lunch</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="repasAssis">Repas assis</label>	
+                                    </br>	
+                                    <label>Boissons :</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="cocktailMaison">Cocktail maison</label>
+                                    </br>	
+                                </div>
+
+                                <div class="form-group">	
+                                    <label>Animation(s) :</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="disco">Disco</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="discoAnimation">Disco et animation</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="orchestre">Orchestre</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="groupeMusical">Groupe musical</label>
+                                    </br>
+                                    <label>Prestation de décoration :</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="ornementationBasique">Ornementation basique</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="decoFlorale">Décoration florale</label>
+                                    </br>
+                                    <label>Prestation communication post-évènementielle :</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="photos">Photos</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="videos">Vidéos</label>
+                                    </br>
+                                    <label>Prestation(s) sécurité :</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="accesSalle">Accès salle</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="parking">Gardiennage parking</label>
+                                </div>
+                                <div>	
+                                    <form action="/ProjetEAI-war/ApplicationEmployes" method="get">
+
+                                        <input class="btn btn-lg btn-block btn-info"  type="submit" name="type" value="creerContrat" ng-click="creerContrat()">
+                                    </form>
+
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!--</div>
+            </div>-->
+                </div>
             </div>
-            <div class="panel-body">
-                <form accept-charset="UTF-8" role="form">
-                    <fieldset>
-                        <div class="form-inline">
-                            <label>Nom et coordonnées du client :</label>
-                            <input class="form-control" name="nomCoordonnees"></br></br>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-inline"><label>Appellation manifestation :</label>
-                                <input class="form-control" name="nomManif"></div></br>
-                            <label>Type de manifestation :</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Familiale</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Associative</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Professionnelle</label></br>
-                            <div class="form-inline"><label>Nombre de participants (prévisionnel) :</label>
-                                <input class="form-control" name="nbParticipantsPrevisionnel" placeholder=".. / .."></div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="form-inline"><label>Date manifestation :</label>
-                                <input class="form-control" name="dateManif" placeholder="DD/MM/YYYY"></div>
-                            </br>
-                            <label>Début manifestation : </label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">11h</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">18h</label>
-                            </br>
-                            <label>Fin manifestation : </label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">18h</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">00h</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">03h</label>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Type de prestation(s) :</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Cocktail seul</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Lunch</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Repas assis</label>	
-                            </br>	
-                            <label>Boissons :</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Cocktail maison</label>
-                            </br>	
-                        </div>
-
-                        <div class="form-group">	
-                            <label>Animation(s) :</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Disco</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Disco et animation</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Orchestre</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Groupe musical</label>
-                            </br>
-                            <label>Prestation de décoration :</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Ornementation basique</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Décoration florale</label>
-                            </br>
-                            <label>Prestation communication post-évènementielle :</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Photos</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Vidéos</label>
-                            </br>
-                            <label>Prestation(s) sécurité :</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Accès salle</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="">Gardiennage parking</label>
-                        </div>
-                        <div>	
-                            <form action="/ProjetEAI-war/ApplicationEmployes" method="get">
-                          
-                                <input class="btn btn-lg btn-block btn-info"  type="submit" name="type" value="creerContrat">
-                            </form>
-                            
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <!--</div>
-    </div>-->
         </div>
-    </div>      
+    </body>
 </html>
