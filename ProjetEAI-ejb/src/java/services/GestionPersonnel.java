@@ -41,7 +41,7 @@ public class GestionPersonnel   {
     @EJB
     PlanningSingleton planning;  
     
-    public float prévoirPersonnel(EnumTypePersonne type, int effectif) throws ExceptionPersonnelNonTrouve {
+    public float prevoirPersonnel(EnumTypePersonne type, int effectif) throws ExceptionPersonnelNonTrouve {
         float retour = 0.0f;
         Message m = context.createConsumer(topic).receive();
         //Récupération du contrat

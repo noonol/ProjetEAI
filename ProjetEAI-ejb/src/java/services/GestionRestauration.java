@@ -10,6 +10,7 @@ import enumeration.EtatContrat;
 import enumeration.typePrestations;
 import enumeration.typeBouteille;
 import enumeration.typeMP;
+import exceptions.ExceptionPersonnelNonTrouve;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,6 +54,8 @@ public class GestionRestauration implements MessageListener {
 
     @EJB
     SingletonTraiteur lesTraiteurs;
+    @EJB
+    GestionPersonnel lesPersonnel;
 
     @EJB
     SingletonRepas lesRepas;
@@ -87,12 +90,14 @@ public class GestionRestauration implements MessageListener {
                 }
             } catch (JMSException ex) {
                 Logger.getLogger(GestionProjet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ExceptionPersonnelNonTrouve ex) {
+                Logger.getLogger(GestionRestauration.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void GererRestauration(Contrat monContrat) {
+    public void GererRestauration(Contrat monContrat) throws ExceptionPersonnelNonTrouve {
         float montantPrevu = 0;
         float montantTraiteur = 0;
         float montantBouteilles = 0;
@@ -105,7 +110,8 @@ public class GestionRestauration implements MessageListener {
             montantTraiteur = montantTraiteur + ((montantTraiteur * 15) / 100);
 
             // Pour la gestion du personnel : 
-            //  TODO NOL   montantPrevu= montantPrevu + PrévoirPersonnel(EnumTypePersonne.personnelDeService, monContrat.getIdContrat(), 2);
+          // on réserve le personnel
+        montantPrevu= montantPrevu + lesPersonnel.prevoirPersonnel(EnumTypePersonne.personnelDeService,  2);
             ObjectMessage om = context.createObjectMessage(monContrat);
             context.createProducer().send(topic, om);
         } else {
@@ -116,7 +122,7 @@ public class GestionRestauration implements MessageListener {
             Repas monRepas = new Repas(lesRepas.getSizeLesRepas() + 1, monContrat.getTypePresta(), montantTraiteur, lesTraiteurs.getTraiteur(1), monContrat.getIdContrat(), monContrat.isCocktailMaison());
             lesRepas.add(monRepas);
             if (monRepas.getCocktailMaison() == true) {
-                //   TODO NOL    PrévoirPersonnel(EnumTypePersonne.preparateurCocktail, monContrat.getIdContrat(), 2);
+           // on réserve le personnel
                 ObjectMessage om2 = context.createObjectMessage(monContrat);
                 context.createProducer().send(topic, om2);
             }
@@ -149,15 +155,14 @@ public class GestionRestauration implements MessageListener {
             monRepas.setMontantBouteilles(montantBouteilles);
             monRepas.setMontantMP(montantMP);
             montantPrevu = montantPrevu + montantTraiteur + montantMP + montantBouteilles;
-            // TODO  montant a contrat/gestion de projet 
+            // envoi du  montant gestion de projet 
             ObjectMessage omToSend = context.createObjectMessage(monContrat);
             context.createProducer().send(topic, omToSend);
 
-            // Nolwenn !!! :) Ici on envois le montant à la file que gestion de projet récupérera
             omToSend = context.createObjectMessage(montantPrevu);
             context.createProducer().send(file, omToSend);
         }
-        // TODO laisser ou pas ?
+    
         monContrat.setEtat(EtatContrat.gestion_restauration_creer);
     }
 

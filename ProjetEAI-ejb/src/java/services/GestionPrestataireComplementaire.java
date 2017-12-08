@@ -84,7 +84,7 @@ private final float montantSAGEM = 306.5f;
                           //  c.setEtat(EtatContrat.gestion_personnel_creer);
                             ObjectMessage o = context.createObjectMessage(c);
                             context.createProducer().send(topic, o);
-                            montantSup += gestionPersonnel.prévoirPersonnel(EnumTypePersonne.agentSecurite, effectif);    
+                            montantSup += gestionPersonnel.prevoirPersonnel(EnumTypePersonne.agentSecurite, effectif);    
                         } catch (ExceptionPersonnelNonTrouve ex) {
                                 try {
                                     throw new ExceptionPersonnelNonTrouve();
@@ -98,7 +98,7 @@ private final float montantSAGEM = 306.5f;
                             ObjectMessage o = context.createObjectMessage(c);
                             context.createProducer().send(topic, o);
                             try {
-                                montantSup+=gestionPersonnel.prévoirPersonnel(EnumTypePersonne.DJ, 1);
+                                montantSup+=gestionPersonnel.prevoirPersonnel(EnumTypePersonne.DJ, 1);
                                 montantSup += montantSAGEM;
                             } catch (ExceptionPersonnelNonTrouve ex) {
                                 try {
@@ -113,7 +113,7 @@ private final float montantSAGEM = 306.5f;
                             ObjectMessage o = context.createObjectMessage(c);
                             context.createProducer().send(topic, o);
                             try {
-                                montantSup+=gestionPersonnel.prévoirPersonnel(EnumTypePersonne.DJanimateur, 1);
+                                montantSup+=gestionPersonnel.prevoirPersonnel(EnumTypePersonne.DJanimateur, 1);
                                  montantSup += montantSAGEM;
                             } catch (ExceptionPersonnelNonTrouve ex) {
                                  try {
@@ -128,7 +128,7 @@ private final float montantSAGEM = 306.5f;
                             ObjectMessage o = context.createObjectMessage(c);
                             context.createProducer().send(topic, o);
                             try {
-                                montantSup+=gestionPersonnel.prévoirPersonnel(EnumTypePersonne.fleuriste, 1);
+                                montantSup+=gestionPersonnel.prevoirPersonnel(EnumTypePersonne.fleuriste, 1);
                                  montantSup += montantSAGEM;
                             } catch (ExceptionPersonnelNonTrouve ex) {
                                 try {
@@ -144,7 +144,7 @@ private final float montantSAGEM = 306.5f;
                             context.createProducer().send(topic, o);
                             
                             try {
-                                montantSup+=gestionPersonnel.prévoirPersonnel(EnumTypePersonne.photographeVideaste, 1);
+                                montantSup+=gestionPersonnel.prevoirPersonnel(EnumTypePersonne.photographeVideaste, 1);
                             } catch (ExceptionPersonnelNonTrouve ex) {
                                  try {
                                     throw new ExceptionPersonnelNonTrouve();
