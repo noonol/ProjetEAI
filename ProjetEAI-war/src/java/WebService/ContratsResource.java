@@ -31,7 +31,7 @@ import messages.*;
  *
  * @author Rigal
  */
-@Path("generic")
+@Path("contrat")
 public class ContratsResource {
 
     @Context
@@ -69,6 +69,7 @@ public class ContratsResource {
     public void postJson(Contrat content) throws ExceptionTropicDejaUtilise {
         contrats.creerContrat(content.getIdContrat(), content.getAnimation(), content.getDecoration(), content.getCommunication(), content.getSecurite(),content.getMontantGlobal(), content.getNbPersonnes(), content.getLeClient(), content.getDateHeureDebut(), content.getDateHeureFin(), content.getSalle(), content.getTypePresta(),content.isCocktailMaison());
        //creerContrat(idContrat, animation, decoration, communication, securite, montantGlobal, nbPersonnes, leClient, debut, fin, mySalle, type, cocktailMaison);
+       //RENVOYER UN MSG A L'UTILISATEUR
     }
     
     private ApplicationEmployes lookupApplicationEmployesBean() {

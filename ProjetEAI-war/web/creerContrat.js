@@ -102,13 +102,13 @@ var app = angular.module("app", [])
                     prestaSecu: prestaSecu
                 }
                 console.log(data);
-                /*$http.post('/creerContrat', JSON.stringify(data)).then(function (response) {
+                $http.post('/ProjetEAI-web/webresources/contrat', JSON.stringify(data)).then(function (response) {
                     if (response.data)
                         $scope.msg = "Post Data Submitted Successfully!";
 
                 }, function (response) {
                     $scope.msg = "Service not Exists";
-                });*/
+                });
             }
 
 
